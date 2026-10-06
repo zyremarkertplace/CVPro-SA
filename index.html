@@ -1513,193 +1513,67 @@ Assisted customers and maintained stock."
 
   function searchLocation() {
 
-    const input =
-      document.getElementById("location");
+  const input = document.getElementById("location");
+  const results = document.getElementById("locationResults");
 
-    const results =
-      document.getElementById("locationResults");
+  const search = input.value.trim().toLowerCase();
 
-    const search =
-      input.value.trim();
+  results.innerHTML = "";
 
-    clearTimeout(locationSearchTimer);
-
-    results.innerHTML = "";
-
-    if (search.length < 3) {
-      return;
-    }
-
-    const loading =
-      document.createElement("div");
-
-    loading.className =
-      "education-result";
-
-    loading.textContent =
-      "Searching addresses...";
-
-    results.appendChild(loading);
-
-
-    locationSearchTimer =
-      setTimeout(async function() {
-
-        try {
-
-          const url =
-            "https://photon.komoot.io/api/?" +
-            "q=" +
-            encodeURIComponent(
-              search + ", KwaZulu-Natal, South Africa"
-            ) +
-            "&limit=8";
-
-          const response =
-            await fetch(url);
-
-          if (!response.ok) {
-            throw new Error(
-              "Address search failed"
-            );
-          }
-
-          const data =
-            await response.json();
-
-          results.innerHTML = "";
-
-          const places =
-            data.features || [];
-
-          if (places.length === 0) {
-
-            const noResults =
-              document.createElement("div");
-
-            noResults.className =
-              "education-result";
-
-            noResults.textContent =
-              "No matching address found. You can type your address manually.";
-
-            results.appendChild(
-              noResults
-            );
-
-            return;
-          }
-
-
-          places.forEach(function(place) {
-
-            const properties =
-              place.properties || {};
-
-            const street =
-              properties.street || "";
-
-            const houseNumber =
-              properties.housenumber || "";
-
-            const suburb =
-              properties.district ||
-              properties.suburb ||
-              properties.locality ||
-              "";
-
-            const city =
-              properties.city ||
-              properties.town ||
-              properties.county ||
-              "";
-
-            const state =
-              properties.state ||
-              "KwaZulu-Natal";
-
-            const postcode =
-              properties.postcode ||
-              "";
-
-
-            const addressParts =
-              [
-                houseNumber,
-                street,
-                suburb,
-                city,
-                state,
-                postcode
-              ]
-              .filter(Boolean);
-
-
-            const address =
-              addressParts.join(", ");
-
-
-            if (!address) {
-              return;
-            }
-
-
-            const item =
-              document.createElement("div");
-
-            item.className =
-              "education-result";
-
-            item.textContent =
-              address;
-
-
-            item.onclick =
-              function() {
-
-                input.value =
-                  address;
-
-                results.innerHTML =
-                  "";
-
-              };
-
-
-            results.appendChild(
-              item
-            );
-
-          });
-
-
-        } catch (error) {
-
-          results.innerHTML = "";
-
-          const errorItem =
-            document.createElement("div");
-
-          errorItem.className =
-            "education-result";
-
-          errorItem.textContent =
-            "Address search is temporarily unavailable. You can type your address manually.";
-
-          results.appendChild(
-            errorItem
-          );
-
-          console.error(
-            "Location search error:",
-            error
-          );
-
-        }
-
-      }, 500);
-
+  if (!search) {
+    return;
   }
+
+  const matches = KZN_LOCATION_DATA.filter(function(location) {
+
+    return (
+      location.name.toLowerCase().includes(search) ||
+      location.city.toLowerCase().includes(search)
+    );
+
+  });
+
+  matches.forEach(function(location) {
+
+    const item = document.createElement("div");
+
+    item.className = "education-result";
+
+    item.textContent =
+      location.name +
+      ", " +
+      location.city +
+      ", KwaZulu-Natal";
+
+    item.onclick = function() {
+
+      input.value =
+        location.name +
+        ", " +
+        location.city +
+        ", KwaZulu-Natal";
+
+      results.innerHTML = "";
+    };
+
+    results.appendChild(item);
+
+  });
+
+  if (matches.length === 0) {
+
+    const item = document.createElement("div");
+
+    item.className = "education-result";
+
+    item.textContent =
+      "No matching KZN location found. You can type your location manually.";
+
+    item.style.cursor = "default";
+
+    results.appendChild(item);
+  }
+}
 
 </script>
 
