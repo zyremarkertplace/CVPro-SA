@@ -1798,18 +1798,26 @@ function updateEducationYear() {
     const educationInstitution =
       getValue("educationInstitution");
 
-    const educationYear =
-      getValue("educationYear");
+  const educationYear =
+  getValue("educationYear");
 
 
-    const education =
-      [
-        educationQualification,
-        educationInstitution,
-        educationYear
-      ]
-      .filter(Boolean)
-      .join(" / ");
+const selectedSubjects =
+  Array.from(
+    document.querySelectorAll(
+      'input[name="subject"]:checked'
+    )
+  ).map(input => input.value);
+
+
+const education =
+  [
+    educationQualification,
+    educationInstitution,
+    educationYear
+  ]
+  .filter(Boolean)
+  .join(" / ");
 
 
     const selectedSkills =
