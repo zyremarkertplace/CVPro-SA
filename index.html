@@ -453,19 +453,82 @@
       </div>
 
       <div class="field">
-        <label for="education">
-          Education
-        </label>
 
-        <textarea
-          id="education"
-          placeholder="Example:
+  <label>Education Level</label>
 
-National Senior Certificate (Matric)
-ABC High School
-2024"
-        ></textarea>
-      </div>
+  <select id="educationLevel" onchange="updateEducationInstitutions()">
+    <option value="">Select education level</option>
+
+    <option value="school">School</option>
+    <option value="tvet">TVET College</option>
+    <option value="university">University</option>
+    <option value="universityTechnology">University of Technology</option>
+    <option value="private">Private College</option>
+    <option value="training">Short Course / Training</option>
+
+  </select>
+
+</div>
+
+
+<div class="field">
+
+  <label>Institution / School</label>
+
+  <input
+    type="text"
+    id="educationInstitution"
+    list="educationInstitutions"
+    placeholder="Search or type school / college / university"
+  >
+
+  <datalist id="educationInstitutions"></datalist>
+
+</div>
+
+
+<div class="field">
+
+  <label>Qualification / Grade / Course</label>
+
+  <input
+    type="text"
+    id="educationQualification"
+    placeholder="e.g. National Senior Certificate"
+  >
+
+</div>
+
+
+<div class="field">
+
+  <label>Year</label>
+
+  <select id="educationYear">
+
+    <option value="">Select year</option>
+
+    <option>2026</option>
+    <option>2025</option>
+    <option>2024</option>
+    <option>2023</option>
+    <option>2022</option>
+    <option>2021</option>
+    <option>2020</option>
+    <option>2019</option>
+    <option>2018</option>
+    <option>2017</option>
+    <option>2016</option>
+    <option>2015</option>
+    <option>2014</option>
+    <option>2013</option>
+    <option>2012</option>
+    <option>2011</option>
+    <option>2010</option>
+
+  </select>
+
+</div>
 
       <div class="field">
 
