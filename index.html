@@ -1576,8 +1576,15 @@ function updateEducationYear() {
     const certificates =
       getValue("certificates");
 
-    const languages =
-      getValue("languages");
+   const selectedLanguages =
+  Array.from(
+    document.querySelectorAll(
+      'input[name="language"]:checked'
+    )
+  ).map(input => input.value);
+
+const languages =
+  selectedLanguages.join(", ");
 
     const additional =
       getValue("additional");
