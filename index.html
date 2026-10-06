@@ -1893,21 +1893,73 @@ const additional =
       contactParts.join(" • ");
 
 
-    let educationHTML =
-  formatText(education);
+    let educationHTML = "";
 
-if (selectedSubjects.length > 0) {
+if (
+  educationQualification ||
+  educationInstitution ||
+  educationYear
+) {
 
   educationHTML += `
-    <br><strong>Subjects:</strong>
-    <ul>
-      ${selectedSubjects
-        .map(subject => `<li>${escapeHTML(subject)}</li>`)
-        .join("")}
-    </ul>
+    <div class="cv-education-item">
+  `;
+
+  if (educationQualification) {
+
+    educationHTML += `
+      <div class="cv-education-qualification">
+        ${escapeHTML(educationQualification)}
+      </div>
+    `;
+
+  }
+
+  if (educationInstitution) {
+
+    educationHTML += `
+      <div class="cv-education-institution">
+        ${escapeHTML(educationInstitution)}
+      </div>
+    `;
+
+  }
+
+  if (educationYear) {
+
+    educationHTML += `
+      <div class="cv-education-year">
+        ${escapeHTML(educationYear)}
+      </div>
+    `;
+
+  }
+
+
+  if (selectedSubjects.length > 0) {
+
+    educationHTML += `
+      <div class="cv-education-subjects-title">
+        Subjects
+      </div>
+
+      <ul class="cv-education-subjects">
+        ${selectedSubjects
+          .map(subject => `
+            <li>${escapeHTML(subject)}</li>
+          `)
+          .join("")}
+      </ul>
+    `;
+
+  }
+
+  educationHTML += `
+    </div>
   `;
 
 }
+
 
 setSection(
   "educationSection",
