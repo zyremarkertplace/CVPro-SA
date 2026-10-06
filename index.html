@@ -996,13 +996,141 @@ Assisted customers and maintained stock."
 
   function updateEducationInstitutions() {
 
-    const input =
-      document.getElementById("educationInstitution");
+  const input =
+    document.getElementById("educationInstitution");
 
-    input.value = "";
+  input.value = "";
 
-    showEducationInstitutions();
+  showEducationInstitutions();
+
+  updateEducationQualification();
+}
+
+
+function updateEducationQualification() {
+
+  const level =
+    document.getElementById("educationLevel").value;
+
+  const qualification =
+    document.getElementById("educationQualification");
+
+  qualification.innerHTML = "";
+
+  const defaultOption =
+    document.createElement("option");
+
+  defaultOption.value = "";
+
+  defaultOption.textContent =
+    "Select qualification / grade / course";
+
+  qualification.appendChild(defaultOption);
+
+
+  let options = [];
+
+
+  if (level === "school") {
+
+    options = [
+      "Grade 8",
+      "Grade 9",
+      "Grade 10",
+      "Grade 11",
+      "Grade 12 / Matric"
+    ];
+
   }
+
+
+  if (level === "tvet") {
+
+    options = [
+      "NC(V) Level 2",
+      "NC(V) Level 3",
+      "NC(V) Level 4",
+      "NATED / Report 191",
+      "N4",
+      "N5",
+      "N6",
+      "National N Diploma"
+    ];
+
+  }
+
+
+  if (level === "university") {
+
+    options = [
+      "Higher Certificate",
+      "Advanced Certificate",
+      "Diploma",
+      "Advanced Diploma",
+      "Bachelor's Degree",
+      "Honours Degree",
+      "Master's Degree",
+      "Doctoral Degree"
+    ];
+
+  }
+
+
+  if (level === "universityTechnology") {
+
+    options = [
+      "Higher Certificate",
+      "Diploma",
+      "Advanced Diploma",
+      "Bachelor's Degree",
+      "Postgraduate Diploma",
+      "Master's Degree",
+      "Doctoral Degree"
+    ];
+
+  }
+
+
+  if (level === "private") {
+
+    options = [
+      "Certificate",
+      "Higher Certificate",
+      "Diploma",
+      "Advanced Diploma",
+      "Other Qualification"
+    ];
+
+  }
+
+
+  if (level === "training") {
+
+    options = [
+      "Short Course",
+      "Skills Programme",
+      "Certificate",
+      "Occupational Certificate",
+      "Other Training"
+    ];
+
+  }
+
+
+  options.forEach(function(optionText) {
+
+    const option =
+      document.createElement("option");
+
+    option.value = optionText;
+
+    option.textContent = optionText;
+
+    qualification.appendChild(option);
+
+  });
+
+}
 
 
   function getEducationInstitutions() {
