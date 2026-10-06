@@ -1724,8 +1724,8 @@ function updateEducationYear() {
       return profile;
     }
 
-    const jobStatus =
-      document.getElementById("jobStatus").value;
+    const experienceStatus =
+  document.getElementById("experienceStatus").value;
 
     const strengths =
       Array.from(
@@ -1767,22 +1767,17 @@ function updateEducationYear() {
     let experienceText;
 
 
-    if (jobStatus === "no-experience") {
+    if (experienceStatus === "none") {
 
-      experienceText =
-        "a motivated individual seeking an opportunity to gain valuable workplace experience";
+  experienceText =
+    "a motivated individual seeking an opportunity to gain valuable workplace experience";
 
-    } else if (jobStatus === "some-experience") {
+} else {
 
-      experienceText =
-        "an individual with some workplace experience who is eager to continue developing professionally";
+  experienceText =
+    "an individual with workplace experience who is eager to continue developing professionally";
 
-    } else {
-
-      experienceText =
-        "an experienced and dependable worker seeking a suitable opportunity";
-
-    }
+}
 
 
     if (strengthText.length > 0) {
