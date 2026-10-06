@@ -356,14 +356,23 @@
       </div>
 
       <div class="field">
-        <label for="location">Location</label>
 
-        <input
-          id="location"
-          type="text"
-          placeholder="e.g. Durban, KwaZulu-Natal"
-        >
-      </div>
+  <label for="location">Address</label>
+
+  <input
+    id="location"
+    type="text"
+    placeholder="Start typing your street, suburb or area..."
+    autocomplete="off"
+    oninput="searchLocation()"
+  >
+
+  <div
+    id="locationResults"
+    class="education-results"
+  ></div>
+
+</div>
 
       <div class="field">
   <label>Personal Profile</label>
