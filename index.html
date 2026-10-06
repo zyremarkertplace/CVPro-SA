@@ -999,39 +999,37 @@ Assisted customers and maintained stock."
 
   function getEducationInstitutions() {
 
-    const level =
-      document.getElementById("educationLevel").value;
+  const level =
+    document.getElementById("educationLevel").value;
 
-    if (level === "school") {
+  if (level === "school") {
 
-  return KZN_EDUCATION_DATA.schools;
+    return KZN_EDUCATION_DATA.schools;
 
-}
-
-    }
-
-    if (level === "tvet") {
-      return KZN_EDUCATION_DATA.tvetColleges;
-    }
-
-    if (level === "university") {
-      return KZN_EDUCATION_DATA.universities;
-    }
-
-    if (level === "universityTechnology") {
-      return KZN_EDUCATION_DATA.universitiesOfTechnology;
-    }
-
-    if (level === "private") {
-      return KZN_EDUCATION_DATA.privateColleges;
-    }
-
-    if (level === "training") {
-      return KZN_EDUCATION_DATA.training;
-    }
-
-    return [];
   }
+
+  if (level === "tvet") {
+    return KZN_EDUCATION_DATA.tvetColleges;
+  }
+
+  if (level === "university") {
+    return KZN_EDUCATION_DATA.universities;
+  }
+
+  if (level === "universityTechnology") {
+    return KZN_EDUCATION_DATA.universitiesOfTechnology;
+  }
+
+  if (level === "private") {
+    return KZN_EDUCATION_DATA.privateColleges;
+  }
+
+  if (level === "training") {
+    return KZN_EDUCATION_DATA.training;
+  }
+
+  return [];
+}
 
 
   function filterEducationInstitutions() {
