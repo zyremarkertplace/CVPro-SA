@@ -1109,6 +1109,21 @@ if (!profile) {
       window.print();
     }
 
+function toggleExperienceFields() {
+
+  const status =
+    document.getElementById("experienceStatus").value;
+
+  const fields =
+    document.getElementById("experienceFields");
+
+  if (status === "yes") {
+    fields.style.display = "block";
+  } else {
+    fields.style.display = "none";
+  }
+}
+
   </script>
 
 </body>
