@@ -46,6 +46,7 @@ schools: [
   "New Forest High School",
   "Phambili High School",
   "Reservoir Hills Secondary School",
+  "Sibusisiwe Comprehensive Technical High School",
   "Umlazi Commercial High School",
   "Umlazi Senior Secondary School",
   "Westridge High School",
