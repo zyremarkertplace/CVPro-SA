@@ -1972,6 +1972,18 @@ function startCV() {
 
   function generateCV() {
 
+  const selectedTemplate =
+    document.getElementById("cvTemplate").value;
+
+  const cv =
+    document.getElementById("cv");
+
+  cv.classList.remove("modern-template");
+
+  if (selectedTemplate === "modern") {
+    cv.classList.add("modern-template");
+  }
+
     const fullName =
       getValue("fullName");
 
