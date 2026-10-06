@@ -955,19 +955,117 @@ function updateEducationInstitutions() {
   const level =
     document.getElementById("educationLevel").value;
 
-  const datalist =
-    document.getElementById("educationInstitutions");
+  const input =
+    document.getElementById("educationInstitution");
 
-  datalist.innerHTML = "";
+  input.value = "";
 
-  let institutions = [];
+  showEducationInstitutions(level, "");
+
+}
+
+    function getEducationInstitutions() {
+
+  const level =
+    document.getElementById("educationLevel").value;
 
   if (level === "school") {
-    institutions = [
+    return [
       "Folweni High School",
       "Other / Type School Name"
     ];
   }
+
+  if (level === "tvet") {
+    return KZN_EDUCATION_DATA.tvetColleges;
+  }
+
+  if (level === "university") {
+    return KZN_EDUCATION_DATA.universities;
+  }
+
+  if (level === "universityTechnology") {
+    return KZN_EDUCATION_DATA.universitiesOfTechnology;
+  }
+
+  if (level === "private") {
+    return KZN_EDUCATION_DATA.privateColleges;
+  }
+
+  if (level === "training") {
+    return KZN_EDUCATION_DATA.training;
+  }
+
+  return [];
+
+}
+
+
+function filterEducationInstitutions() {
+
+  const input =
+    document.getElementById("educationInstitution");
+
+  showEducationInstitutions(
+    document.getElementById("educationLevel").value,
+    input.value
+  );
+
+}
+
+
+function showEducationInstitutions(level, searchText) {
+
+  const results =
+    document.getElementById("educationInstitutionResults");
+
+  results.innerHTML = "";
+
+  if (!level) {
+    return;
+  }
+
+  const institutions =
+    getEducationInstitutions();
+
+  const search =
+    searchText.trim().toLowerCase();
+
+  const filtered =
+    institutions.filter(function(institution) {
+
+      return institution
+        .toLowerCase()
+        .includes(search);
+
+    });
+
+  filtered.forEach(function(institution) {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "education-result";
+
+    item.textContent =
+      institution;
+
+    item.onclick = function() {
+
+      document.getElementById(
+        "educationInstitution"
+      ).value = institution;
+
+      results.innerHTML = "";
+
+    };
+
+    results.appendChild(item);
+
+  });
+
+}
 
   if (level === "tvet") {
     institutions =
