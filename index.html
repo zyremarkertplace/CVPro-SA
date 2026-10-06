@@ -475,11 +475,15 @@
   <input
     type="text"
     id="educationInstitution"
-    list="educationInstitutions"
     placeholder="Search or type school / college / university"
+    autocomplete="off"
+    oninput="filterEducationInstitutions()"
   >
 
-  <datalist id="educationInstitutions"></datalist>
+  <div
+    id="educationInstitutionResults"
+    class="education-results"
+  ></div>
 
 </div>
 
