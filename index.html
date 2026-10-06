@@ -505,12 +505,63 @@
     >
 
 <div class="field">
-  <label for="cvTemplate">CV Template</label>
 
-  <select id="cvTemplate">
-    <option value="classic">Classic</option>
-    <option value="modern">Modern</option>
-  </select>
+  <label>Choose Your CV Template</label>
+
+  <div class="template-options">
+
+    <button
+      type="button"
+      class="template-card selected"
+      data-template="classic"
+      onclick="selectTemplate('classic')"
+    >
+      <div class="template-preview classic-preview">
+        <div class="preview-name"></div>
+        <div class="preview-line"></div>
+        <div class="preview-section"></div>
+        <div class="preview-lines"></div>
+        <div class="preview-section"></div>
+        <div class="preview-lines"></div>
+      </div>
+
+      <strong>Classic</strong>
+
+      <span>
+        Clean and professional
+      </span>
+    </button>
+
+    <button
+      type="button"
+      class="template-card"
+      data-template="modern"
+      onclick="selectTemplate('modern')"
+    >
+      <div class="template-preview modern-preview">
+        <div class="preview-name"></div>
+        <div class="preview-line"></div>
+        <div class="preview-section"></div>
+        <div class="preview-lines"></div>
+        <div class="preview-section"></div>
+        <div class="preview-lines"></div>
+      </div>
+
+      <strong>Modern</strong>
+
+      <span>
+        Bold and contemporary
+      </span>
+    </button>
+
+  </div>
+
+  <input
+    type="hidden"
+    id="cvTemplate"
+    value="classic"
+  >
+
 </div>
 
       <h2>Enter Your Information</h2>
