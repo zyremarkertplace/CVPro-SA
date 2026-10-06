@@ -190,6 +190,27 @@
       margin-bottom: 5px;
     }
 
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 18px;
+  margin-top: 8px;
+}
+
+.cv-skill {
+  font-size: 13.5px;
+  line-height: 1.4;
+  padding-left: 14px;
+  position: relative;
+}
+
+.cv-skill::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
     .experience-title {
       font-weight: 700;
       font-size: 14px;
