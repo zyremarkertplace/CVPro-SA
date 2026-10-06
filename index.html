@@ -1076,7 +1076,26 @@ if (!profile) {
       ". I am hardworking, willing to learn and committed to contributing positively to the workplace.";
   }
 }
-      const education = getValue("education");
+      const educationLevel =
+  getValue("educationLevel");
+
+const educationInstitution =
+  getValue("educationInstitution");
+
+const educationQualification =
+  getValue("educationQualification");
+
+const educationYear =
+  getValue("educationYear");
+
+const education =
+  [
+    educationQualification,
+    educationInstitution,
+    educationYear
+  ]
+  .filter(Boolean)
+  .join(" / ");
       const selectedSkills = Array.from(
   document.querySelectorAll('input[name="skill"]:checked')
 ).map(input => input.value);
