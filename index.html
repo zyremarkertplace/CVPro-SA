@@ -2421,7 +2421,15 @@ const education =
       ).value;
 
 
-    if (experienceStatus === "none") {
+    let experience = "";
+
+const experienceStatus =
+  document.getElementById(
+    "experienceStatus"
+  ).value;
+
+
+if (experienceStatus === "none") {
 
   const practicalSubjects =
     selectedSubjects.map(function(subject) {
@@ -2526,17 +2534,21 @@ const education =
 
   if (practicalExperience.length === 0) {
 
-  if (document.getElementById("educationLevel").value === "tvet") {
+    if (
+      document.getElementById(
+        "educationLevel"
+      ).value === "tvet"
+    ) {
 
-  experience =
-    "Gained practical experience through college-based activities, developing teamwork, communication, problem-solving, responsibility and practical workplace skills.";
+      experience =
+        "Gained practical experience through college-based activities, developing teamwork, communication, problem-solving, responsibility and practical workplace skills.";
 
-} else {
+    } else {
 
-  experience =
-    "Gained practical experience through education-based activities, developing teamwork, communication, problem-solving, responsibility and practical workplace skills.";
+      experience =
+        "Gained practical experience through education-based activities, developing teamwork, communication, problem-solving, responsibility and practical workplace skills.";
 
-}
+    }
 
   } else {
 
@@ -2547,8 +2559,79 @@ const education =
 
 } else {
 
-  experience =
+  const jobTitle =
+    getValue("experienceJobTitle");
+
+  const company =
+    getValue("experienceCompany");
+
+  const startDate =
+    getValue("experienceStart");
+
+  const endDate =
+    getValue("experienceEnd");
+
+  const responsibilities =
     getValue("experience");
+
+  const experienceParts = [];
+
+  if (jobTitle) {
+    experienceParts.push(
+      "<strong>" +
+      escapeHTML(jobTitle) +
+      "</strong>"
+    );
+  }
+
+  if (company) {
+    experienceParts.push(
+      escapeHTML(company)
+    );
+  }
+
+  const dates = [];
+
+  if (startDate) {
+    dates.push(
+      escapeHTML(startDate)
+    );
+  }
+
+  if (endDate) {
+    dates.push(
+      escapeHTML(endDate)
+    );
+  }
+
+  if (dates.length > 0) {
+    experienceParts.push(
+      dates.join(" - ")
+    );
+  }
+
+  let experienceHTML = "";
+
+  if (experienceParts.length > 0) {
+
+    experienceHTML +=
+      "<div style=\"margin-bottom:10px;\">" +
+      experienceParts.join(" | ") +
+      "</div>";
+
+  }
+
+  if (responsibilities) {
+
+    experienceHTML +=
+      "<div>" +
+      formatText(responsibilities) +
+      "</div>";
+
+  }
+
+  experience =
+    experienceHTML;
 
 }
 
