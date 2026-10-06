@@ -983,7 +983,8 @@ Assisted customers and maintained stock."
 
   showEducationInstitutions();
 
-  updateEducationQualification();
+updateEducationQualification();
+updateEducationYear();
 }
 
 
@@ -1109,6 +1110,57 @@ function updateEducationQualification() {
     qualification.appendChild(option);
 
   });
+
+}
+
+function updateEducationYear() {
+
+  const year =
+    document.getElementById("educationYear");
+
+  year.innerHTML = "";
+
+  const defaultOption =
+    document.createElement("option");
+
+  defaultOption.value = "";
+
+  defaultOption.textContent =
+    "Select year";
+
+  year.appendChild(defaultOption);
+
+
+  const currentYear =
+    new Date().getFullYear();
+
+
+  const currentOption =
+    document.createElement("option");
+
+  currentOption.value = "Currently studying";
+
+  currentOption.textContent = "Currently studying";
+
+  year.appendChild(currentOption);
+
+
+  for (
+    let y = currentYear;
+    y >= 2010;
+    y--
+  ) {
+
+    const option =
+      document.createElement("option");
+
+    option.value = y;
+
+    option.textContent = y;
+
+    year.appendChild(option);
+
+  }
 
 }
 
