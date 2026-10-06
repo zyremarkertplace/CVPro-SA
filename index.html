@@ -1861,15 +1861,125 @@ const education =
 
     if (experienceStatus === "none") {
 
-      experience =
-        "No formal work experience yet. Eager to learn, develop new skills and contribute positively in the workplace.";
+  const practicalSubjects =
+    selectedSubjects.map(function(subject) {
+      return subject.toLowerCase();
+    });
 
-    } else {
+  const practicalExperience = [];
 
-      experience =
-        getValue("experience");
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("welding") ||
+      subject.includes("metalwork")
+    )
+  ) {
+    practicalExperience.push(
+      "Gained school-based practical experience in welding and metalwork, including hands-on workshop activities, safe use of tools and equipment, and basic metalworking techniques."
+    );
+  }
 
-    }
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("mechanical technology")
+    )
+  ) {
+    practicalExperience.push(
+      "Completed practical activities in Mechanical Technology, developing hands-on skills, problem-solving ability and awareness of workshop safety."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("engineering graphics") ||
+      subject.includes("design")
+    )
+  ) {
+    practicalExperience.push(
+      "Completed school-based practical and technical drawing activities, developing the ability to understand technical drawings, measurements and design concepts."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("electrical technology")
+    )
+  ) {
+    practicalExperience.push(
+      "Gained school-based practical exposure to electrical technology through classroom and workshop activities, with a focus on safe working practices and basic electrical concepts."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("civil technology") ||
+      subject.includes("construction")
+    )
+  ) {
+    practicalExperience.push(
+      "Completed school-based practical activities related to construction and civil technology, developing hands-on skills, measurement ability and workplace safety awareness."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("computer applications technology") ||
+      subject.includes("information technology")
+    )
+  ) {
+    practicalExperience.push(
+      "Gained practical computer experience through school-based activities involving computer applications, technology and digital problem-solving."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("agricultural")
+    )
+  ) {
+    practicalExperience.push(
+      "Completed school-based practical activities related to agriculture, developing hands-on skills, responsibility and practical problem-solving."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("hospitality")
+    )
+  ) {
+    practicalExperience.push(
+      "Gained practical experience through school-based hospitality activities, developing customer service, teamwork, organisation and workplace hygiene awareness."
+    );
+  }
+
+  if (
+    practicalSubjects.some(subject =>
+      subject.includes("consumer studies")
+    )
+  ) {
+    practicalExperience.push(
+      "Completed school-based practical activities related to Consumer Studies, developing practical problem-solving, organisation and everyday workplace skills."
+    );
+  }
+
+  if (practicalExperience.length === 0) {
+
+    experience =
+      "Gained practical experience through school-based activities, developing teamwork, communication, problem-solving, responsibility and the ability to follow instructions. Developed an understanding of workplace safety and professional conduct.";
+
+  } else {
+
+    experience =
+      practicalExperience.join("\n\n");
+
+  }
+
+} else {
+
+  experience =
+    getValue("experience");
+
+}
 
 
     const certificates =
