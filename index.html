@@ -990,11 +990,9 @@ function updateEducationInstitutions() {
   const level =
     document.getElementById("educationLevel").value;
 
-  if (level === "school") {
-    return [
-      "Folweni High School",
-      "Other / Type School Name"
-    ];
+ if (level === "school") {
+  return KZN_EDUCATION_DATA.schools;
+}
   }
 
   if (level === "tvet") {
