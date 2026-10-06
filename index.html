@@ -1365,48 +1365,114 @@ function updateSubjects() {
 
   const subjects = [
 
-    "English",
-    "isiZulu",
-    "Mathematics",
-    "Mathematical Literacy",
-    "Physical Sciences",
-    "Life Sciences",
-    "Geography",
-    "History",
-    "Business Studies",
-    "Economics",
-    "Accounting",
-    "Computer Applications Technology",
-    "Information Technology",
-    "Engineering Graphics and Design",
-    "Mechanical Technology",
-    "Civil Technology",
-    "Electrical Technology",
-    "Life Orientation"
+  // LANGUAGES
+  "Afrikaans Home Language",
+  "Afrikaans First Additional Language",
+  "Afrikaans Second Additional Language",
 
-  ];
+  "English Home Language",
+  "English First Additional Language",
+  "English Second Additional Language",
 
-  subjects.forEach(function(subject) {
+  "isiNdebele Home Language",
+  "isiNdebele First Additional Language",
+  "isiNdebele Second Additional Language",
 
-    const label =
-      document.createElement("label");
+  "isiXhosa Home Language",
+  "isiXhosa First Additional Language",
+  "isiXhosa Second Additional Language",
 
-    label.style.fontWeight = "400";
+  "isiZulu Home Language",
+  "isiZulu First Additional Language",
+  "isiZulu Second Additional Language",
 
-    label.innerHTML = `
-      <input
-        type="checkbox"
-        name="subject"
-        value="${subject}"
-      >
-      ${subject}
-    `;
+  "Sepedi Home Language",
+  "Sepedi First Additional Language",
+  "Sepedi Second Additional Language",
 
-    container.appendChild(label);
+  "Sesotho Home Language",
+  "Sesotho First Additional Language",
+  "Sesotho Second Additional Language",
 
-  });
+  "Setswana Home Language",
+  "Setswana First Additional Language",
+  "Setswana Second Additional Language",
 
-}
+  "siSwati Home Language",
+  "siSwati First Additional Language",
+  "siSwati Second Additional Language",
+
+  "Tshivenda Home Language",
+  "Tshivenda First Additional Language",
+  "Tshivenda Second Additional Language",
+
+  "itsonga Home Language",
+  "itsonga First Additional Language",
+  "itsonga Second Additional Language",
+
+  "South African Sign Language",
+
+  // MATHEMATICS AND SCIENCE
+  "Mathematics",
+  "Mathematical Literacy",
+  "Technical Mathematics",
+  "Physical Sciences",
+  "Life Sciences",
+  "Technical Sciences",
+
+  // BUSINESS AND COMMERCE
+  "Accounting",
+  "Business Studies",
+  "Economics",
+
+  // HUMANITIES
+  "Geography",
+  "History",
+  "Religion Studies",
+  "Life Orientation",
+
+  // COMPUTER AND INFORMATION TECHNOLOGY
+  "Computer Applications Technology",
+  "Information Technology",
+
+  // ENGINEERING AND TECHNICAL
+  "Engineering Graphics and Design",
+  "Civil Technology",
+  "Civil Technology: Civil Services",
+  "Construction",
+
+  "Electrical Technology",
+  "Electrical Technology: Digital Electronics",
+  "Electrical Technology: Electronics",
+  "Electrical Technology: Power Systems",
+
+  "Mechanical Technology",
+  "Mechanical Technology: Automotive",
+  "Mechanical Technology: Fitting and Machining",
+  "Mechanical Technology: Welding and Metalwork",
+
+  // AGRICULTURE
+  "Agricultural Sciences",
+  "Agricultural Management Practices",
+  "Agricultural Technology",
+
+  // BUSINESS / SERVICES
+  "Consumer Studies",
+  "Hospitality Studies",
+  "Tourism",
+
+  // ARTS
+  "Visual Arts",
+  "Design",
+  "Design Studies",
+  "Dramatic Arts",
+  "Dance Studies",
+  "Music",
+
+  // OTHER
+  "Technology",
+  "Other"
+];
 
 function updateEducationYear() {
 
