@@ -1302,116 +1302,593 @@ if (experienceStatusElement) {
 );
 
 
-      setSection(
-        "experienceSection",
-        "cvExperience",
-        formatText(experience)
-      );
+<script src="education-data.js"></script>
 
+<script>
 
-      setSection(
-        "certificatesSection",
-        "cvCertificates",
-        formatText(certificates)
-      );
+  function getValue(id) {
+    const element = document.getElementById(id);
 
-
-      setSection(
-        "languagesSection",
-        "cvLanguages",
-        formatText(languages)
-      );
-
-
-      setSection(
-        "additionalSection",
-        "cvAdditional",
-        formatText(additional)
-      );
-
-
-      document.getElementById("formSection").style.display =
-        "none";
-
-      document.getElementById("cvSection").style.display =
-        "block";
-
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
+    if (!element) {
+      return "";
     }
 
+    return element.value.trim();
+  }
 
-    function editCV() {
 
-      document.getElementById("cvSection").style.display =
-        "none";
+  function escapeHTML(text) {
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
-      document.getElementById("formSection").style.display =
-        "block";
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+  function formatText(text) {
+    return escapeHTML(text)
+      .replace(/\n/g, "<br>");
+  }
 
+
+  function createSkillsList(text) {
+
+    const skills = text
+      .split("\n")
+      .map(skill => skill.trim())
+      .filter(skill => skill !== "");
+
+    if (skills.length === 0) {
+      return "";
     }
 
+    return `
+      <ul>
+        ${skills
+          .map(skill => `<li>${escapeHTML(skill)}</li>`)
+          .join("")}
+      </ul>
+    `;
+  }
 
-    function clearForm() {
 
-      const fields = [
-        "fullName",
-        "phone",
-        "email",
-        "location",
-        "profile",
-        "education",
-        "skills",
-        "experience",
-        "certificates",
-        "languages",
-        "additional"
+  function setSection(sectionId, contentId, content) {
+
+    const section =
+      document.getElementById(sectionId);
+
+    const target =
+      document.getElementById(contentId);
+
+    if (content) {
+      target.innerHTML = content;
+      section.style.display = "block";
+    } else {
+      target.innerHTML = "";
+      section.style.display = "none";
+    }
+  }
+
+
+  /* =========================
+     EDUCATION SYSTEM
+  ========================= */
+
+  function updateEducationInstitutions() {
+
+    const input =
+      document.getElementById("educationInstitution");
+
+    input.value = "";
+
+    showEducationInstitutions();
+  }
+
+
+  function getEducationInstitutions() {
+
+    const level =
+      document.getElementById("educationLevel").value;
+
+    if (level === "school") {
+
+      return [
+        "Folweni High School",
+        "Other / Type School Name"
       ];
 
+    }
 
-      fields.forEach(id => {
-        document.getElementById(id).value = "";
+    if (level === "tvet") {
+      return KZN_EDUCATION_DATA.tvetColleges;
+    }
+
+    if (level === "university") {
+      return KZN_EDUCATION_DATA.universities;
+    }
+
+    if (level === "universityTechnology") {
+      return KZN_EDUCATION_DATA.universitiesOfTechnology;
+    }
+
+    if (level === "private") {
+      return KZN_EDUCATION_DATA.privateColleges;
+    }
+
+    if (level === "training") {
+      return KZN_EDUCATION_DATA.training;
+    }
+
+    return [];
+  }
+
+
+  function filterEducationInstitutions() {
+
+    showEducationInstitutions();
+  }
+
+
+  function showEducationInstitutions() {
+
+    const results =
+      document.getElementById(
+        "educationInstitutionResults"
+      );
+
+    const input =
+      document.getElementById(
+        "educationInstitution"
+      );
+
+    results.innerHTML = "";
+
+    const level =
+      document.getElementById(
+        "educationLevel"
+      ).value;
+
+    if (!level) {
+      return;
+    }
+
+    const institutions =
+      getEducationInstitutions();
+
+    const search =
+      input.value.trim().toLowerCase();
+
+    const filtered =
+      institutions.filter(function(institution) {
+
+        return institution
+          .toLowerCase()
+          .includes(search);
+
       });
 
 
-      document.getElementById("cvSection").style.display =
-        "none";
+    filtered.forEach(function(institution) {
 
-      document.getElementById("formSection").style.display =
-        "block";
+      const item =
+        document.createElement("div");
 
-    }
+      item.className =
+        "education-result";
 
+      item.textContent =
+        institution;
 
-    function downloadCV() {
-      window.print();
-    }
+      item.onclick = function() {
 
-function toggleExperienceFields() {
+        input.value = institution;
 
-  const status =
-    document.getElementById("experienceStatus").value;
+        results.innerHTML = "";
 
-  const fields =
-    document.getElementById("experienceFields");
+      };
 
-  if (status === "yes") {
-    fields.style.display = "block";
-  } else {
-    fields.style.display = "none";
+      results.appendChild(item);
+
+    });
+
   }
-}
 
-  </script>
+
+  /* =========================
+     PROFILE GENERATOR
+  ========================= */
+
+  function generateProfile() {
+
+    let profile =
+      getValue("profile");
+
+    if (profile) {
+      return profile;
+    }
+
+    const jobStatus =
+      document.getElementById("jobStatus").value;
+
+    const strengths =
+      Array.from(
+        document.querySelectorAll(
+          'input[name="strength"]:checked'
+        )
+      ).map(input => input.value);
+
+    const strengthText = [];
+
+
+    if (strengths.includes("communication")) {
+      strengthText.push("strong communication skills");
+    }
+
+    if (strengths.includes("teamwork")) {
+      strengthText.push("teamwork");
+    }
+
+    if (strengths.includes("problem-solving")) {
+      strengthText.push("problem-solving skills");
+    }
+
+    if (strengths.includes("customer-service")) {
+      strengthText.push("customer service");
+    }
+
+    if (strengths.includes("computer")) {
+      strengthText.push("computer skills");
+    }
+
+    if (strengths.includes("hands-on")) {
+      strengthText.push(
+        "a practical and hands-on approach to work"
+      );
+    }
+
+
+    let experienceText;
+
+
+    if (jobStatus === "no-experience") {
+
+      experienceText =
+        "a motivated individual seeking an opportunity to gain valuable workplace experience";
+
+    } else if (jobStatus === "some-experience") {
+
+      experienceText =
+        "an individual with some workplace experience who is eager to continue developing professionally";
+
+    } else {
+
+      experienceText =
+        "an experienced and dependable worker seeking a suitable opportunity";
+
+    }
+
+
+    if (strengthText.length > 0) {
+
+      profile =
+        "I am " +
+        experienceText +
+        ". I have " +
+        strengthText.join(", ") +
+        " and I am committed to learning, working well with others and contributing positively to the workplace.";
+
+    } else {
+
+      profile =
+        "I am " +
+        experienceText +
+        ". I am hardworking, willing to learn and committed to contributing positively to the workplace.";
+
+    }
+
+    return profile;
+  }
+
+
+  /* =========================
+     GENERATE CV
+  ========================= */
+
+  function generateCV() {
+
+    const fullName =
+      getValue("fullName");
+
+    const phone =
+      getValue("phone");
+
+    const email =
+      getValue("email");
+
+    const location =
+      getValue("location");
+
+
+    if (!fullName) {
+      alert("Please enter your full name.");
+      return;
+    }
+
+    if (!phone) {
+      alert("Please enter your phone number.");
+      return;
+    }
+
+    if (!email) {
+      alert("Please enter your email address.");
+      return;
+    }
+
+
+    const profile =
+      generateProfile();
+
+
+    const educationQualification =
+      getValue("educationQualification");
+
+    const educationInstitution =
+      getValue("educationInstitution");
+
+    const educationYear =
+      getValue("educationYear");
+
+
+    const education =
+      [
+        educationQualification,
+        educationInstitution,
+        educationYear
+      ]
+      .filter(Boolean)
+      .join(" / ");
+
+
+    const selectedSkills =
+      Array.from(
+        document.querySelectorAll(
+          'input[name="skill"]:checked'
+        )
+      ).map(input => input.value);
+
+
+    let experience = "";
+
+    const experienceStatus =
+      document.getElementById(
+        "experienceStatus"
+      ).value;
+
+
+    if (experienceStatus === "none") {
+
+      experience =
+        "No formal work experience yet. Eager to learn, develop new skills and contribute positively in the workplace.";
+
+    } else {
+
+      experience =
+        getValue("experience");
+
+    }
+
+
+    const certificates =
+      getValue("certificates");
+
+    const languages =
+      getValue("languages");
+
+    const additional =
+      getValue("additional");
+
+
+    document.getElementById(
+      "cvName"
+    ).textContent =
+      fullName.toUpperCase();
+
+
+    const contactParts =
+      [
+        phone,
+        email,
+        location
+      ].filter(Boolean);
+
+
+    document.getElementById(
+      "cvContact"
+    ).textContent =
+      contactParts.join(" • ");
+
+
+    setSection(
+      "profileSection",
+      "cvProfile",
+      formatText(profile)
+    );
+
+
+    setSection(
+      "educationSection",
+      "cvEducation",
+      formatText(education)
+    );
+
+
+    setSection(
+      "skillsSection",
+      "cvSkills",
+      createSkillsList(
+        selectedSkills.join("\n")
+      )
+    );
+
+
+    setSection(
+      "experienceSection",
+      "cvExperience",
+      formatText(experience)
+    );
+
+
+    setSection(
+      "certificatesSection",
+      "cvCertificates",
+      formatText(certificates)
+    );
+
+
+    setSection(
+      "languagesSection",
+      "cvLanguages",
+      formatText(languages)
+    );
+
+
+    setSection(
+      "additionalSection",
+      "cvAdditional",
+      formatText(additional)
+    );
+
+
+    document.getElementById(
+      "formSection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "cvSection"
+    ).style.display = "block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     EDIT CV
+  ========================= */
+
+  function editCV() {
+
+    document.getElementById(
+      "cvSection"
+    ).style.display = "none";
+
+    document.getElementById(
+      "formSection"
+    ).style.display = "block";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================
+     CLEAR FORM
+  ========================= */
+
+  function clearForm() {
+
+    document.getElementById(
+      "formSection"
+    ).querySelectorAll(
+      "input, textarea, select"
+    ).forEach(function(field) {
+
+      if (field.type === "checkbox") {
+
+        field.checked = false;
+
+      } else {
+
+        field.value = "";
+
+      }
+
+    });
+
+
+    document.getElementById(
+      "experienceFields"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "educationInstitutionResults"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+      "cvSection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "formSection"
+    ).style.display = "block";
+
+  }
+
+
+  /* =========================
+     PDF
+  ========================= */
+
+  function downloadCV() {
+
+    window.print();
+
+  }
+
+
+  /* =========================
+     WORK EXPERIENCE
+  ========================= */
+
+  function toggleExperienceFields() {
+
+    const status =
+      document.getElementById(
+        "experienceStatus"
+      ).value;
+
+    const fields =
+      document.getElementById(
+        "experienceFields"
+      );
+
+
+    if (status === "yes") {
+
+      fields.style.display = "block";
+
+    } else {
+
+      fields.style.display = "none";
+
+    }
+
+  }
+
+</script>
 
 </body>
 </html>
