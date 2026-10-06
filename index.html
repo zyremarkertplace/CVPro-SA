@@ -959,14 +959,31 @@ if (!profile) {
       const selectedSkills = Array.from(
   document.querySelectorAll('input[name="skill"]:checked')
 ).map(input => input.value);
-      const experienceStatus =
-  document.getElementById("experienceStatus").value;
+      const experienceStatusElement =
+  document.getElementById("experienceStatus");
 
-let experience = getValue("experience");
+let experience = "";
 
-if (experienceStatus === "none") {
-  experience =
-    "No formal work experience yet. Eager to learn, develop new skills and contribute positively in the workplace.";
+if (experienceStatusElement) {
+
+  const experienceStatus =
+    experienceStatusElement.value;
+
+  if (experienceStatus === "none") {
+
+    experience =
+      "No formal work experience yet. Eager to learn, develop new skills and contribute positively in the workplace.";
+
+  } else {
+
+    experience = getValue("experience");
+
+  }
+
+} else {
+
+  experience = getValue("experience");
+
 }
       const certificates = getValue("certificates");
       const languages = getValue("languages");
