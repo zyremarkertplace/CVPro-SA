@@ -1186,23 +1186,27 @@ Assisted customers and maintained stock."
 
   function createSkillsList(text) {
 
-    const skills = text
-      .split("\n")
-      .map(skill => skill.trim())
-      .filter(skill => skill !== "");
+  const skills = text
+    .split("\n")
+    .map(skill => skill.trim())
+    .filter(skill => skill !== "");
 
-    if (skills.length === 0) {
-      return "";
-    }
-
-    return `
-      <ul>
-        ${skills
-          .map(skill => `<li>${escapeHTML(skill)}</li>`)
-          .join("")}
-      </ul>
-    `;
+  if (skills.length === 0) {
+    return "";
   }
+
+  return `
+    <div class="cv-skills-grid">
+      ${skills
+        .map(skill => `
+          <div class="cv-skill">
+            ${escapeHTML(skill)}
+          </div>
+        `)
+        .join("")}
+    </div>
+  `;
+}
 
 
   function setSection(sectionId, contentId, content) {
