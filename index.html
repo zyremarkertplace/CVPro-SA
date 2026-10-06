@@ -2014,8 +2014,17 @@ const education =
 
   if (practicalExperience.length === 0) {
 
-    experience =
-      "Gained practical experience through school-based activities, developing teamwork, communication, problem-solving, responsibility and workplace safety awareness.";
+  if (document.getElementById("educationLevel").value === "tvet") {
+
+  experience =
+    "Gained practical experience through college-based activities, developing teamwork, communication, problem-solving, responsibility and practical workplace skills.";
+
+} else {
+
+  experience =
+    "Gained practical experience through education-based activities, developing teamwork, communication, problem-solving, responsibility and practical workplace skills.";
+
+}
 
   } else {
 
