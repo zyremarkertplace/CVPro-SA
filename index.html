@@ -2566,61 +2566,90 @@ if (experienceStatus === "none") {
   const responsibilities =
     getValue("experience");
 
+
+  if (!jobTitle) {
+
+    alert(
+      "Please enter your Job Title."
+    );
+
+    return;
+  }
+
+
+  if (!company) {
+
+    alert(
+      "Please enter your Company / Employer."
+    );
+
+    return;
+  }
+
+
+  if (!startDate) {
+
+    alert(
+      "Please enter your Start Date."
+    );
+
+    return;
+  }
+
+
+  if (!endDate) {
+
+    alert(
+      "Please enter your End Date."
+    );
+
+    return;
+  }
+
+
+  if (!responsibilities) {
+
+    alert(
+      "Please enter your Responsibilities / Achievements."
+    );
+
+    return;
+  }
+
+
   const experienceParts = [];
 
-  if (jobTitle) {
-    experienceParts.push(
-      "<strong>" +
-      escapeHTML(jobTitle) +
-      "</strong>"
-    );
-  }
 
-  if (company) {
-    experienceParts.push(
-      escapeHTML(company)
-    );
-  }
+  experienceParts.push(
+    "<strong>" +
+    escapeHTML(jobTitle) +
+    "</strong>"
+  );
 
-  const dates = [];
 
-  if (startDate) {
-    dates.push(
-      escapeHTML(startDate)
-    );
-  }
+  experienceParts.push(
+    escapeHTML(company)
+  );
 
-  if (endDate) {
-    dates.push(
-      escapeHTML(endDate)
-    );
-  }
 
-  if (dates.length > 0) {
-    experienceParts.push(
-      dates.join(" - ")
-    );
-  }
+  experienceParts.push(
+    escapeHTML(startDate) +
+    " - " +
+    escapeHTML(endDate)
+  );
 
-  let experienceHTML = "";
 
-  if (experienceParts.length > 0) {
+  let experienceHTML =
+    "<div style=\"margin-bottom:10px;\">" +
+    experienceParts.join(" | ") +
+    "</div>";
 
-    experienceHTML +=
-      "<div style=\"margin-bottom:10px;\">" +
-      experienceParts.join(" | ") +
-      "</div>";
 
-  }
+  experienceHTML +=
+    "<div>" +
+    formatText(responsibilities) +
+    "</div>";
 
-  if (responsibilities) {
-
-    experienceHTML +=
-      "<div>" +
-      formatText(responsibilities) +
-      "</div>";
-
-  }
 
   experience =
     experienceHTML;
