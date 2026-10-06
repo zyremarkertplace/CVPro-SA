@@ -1893,29 +1893,6 @@ const additional =
       contactParts.join(" • ");
 
 
-  let educationHTML =
-  formatText(education);
-
-if (selectedSubjects.length > 0) {
-
-  educationHTML += `
-    <br><strong>Subjects:</strong>
-    <ul>
-      ${selectedSubjects
-        .map(subject => `<li>${escapeHTML(subject)}</li>`)
-        .join("")}
-    </ul>
-  `;
-
-}
-
-setSection(
-  "educationSection",
-  "cvEducation",
-  educationHTML
-);
-
-
     let educationHTML =
   formatText(education);
 
