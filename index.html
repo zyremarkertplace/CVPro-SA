@@ -956,7 +956,9 @@ if (!profile) {
   }
 }
       const education = getValue("education");
-      const skills = getValue("skills");
+      const selectedSkills = Array.from(
+  document.querySelectorAll('input[name="skill"]:checked')
+).map(input => input.value);
       const experience = getValue("experience");
       const certificates = getValue("certificates");
       const languages = getValue("languages");
