@@ -345,12 +345,109 @@
       </div>
 
       <div class="field">
-        <label for="profile">
-          Personal Profile
-        </label>
+  <label>Personal Profile</label>
 
-        <textarea
-          id="profile"
+  <p style="font-size:13px;color:#666;margin:0 0 10px;">
+    Choose a few options and we'll create a professional profile for your CV.
+  </p>
+
+  <label for="jobStatus" style="font-weight:600;">
+    Work Experience
+  </label>
+
+  <select
+    id="jobStatus"
+    style="width:100%;padding:12px;border:1px solid #ccc;border-radius:7px;font-size:15px;margin-bottom:12px;"
+  >
+    <option value="no-experience">
+      No work experience
+    </option>
+
+    <option value="some-experience">
+      Some work experience
+    </option>
+
+    <option value="experienced">
+      Experienced worker
+    </option>
+  </select>
+
+
+  <label style="font-weight:600;margin-bottom:8px;">
+    Select your strengths
+  </label>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="strength"
+        value="communication"
+      >
+      Communication
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="strength"
+        value="teamwork"
+      >
+      Teamwork
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="strength"
+        value="problem-solving"
+      >
+      Problem Solving
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="strength"
+        value="customer-service"
+      >
+      Customer Service
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="strength"
+        value="computer"
+      >
+      Computer Skills
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="strength"
+        value="hands-on"
+      >
+      Hands-on Work
+    </label>
+
+  </div>
+
+  <label
+    for="profile"
+    style="display:block;margin-top:15px;"
+  >
+    Personal Profile
+  </label>
+
+  <textarea
+    id="profile"
+    placeholder="Optional: write your own profile, or leave blank and we'll create one for you."
+  ></textarea>
+
+</div>
           placeholder="Tell employers briefly about yourself, your strengths and what type of opportunity you are looking for."
         ></textarea>
       </div>
