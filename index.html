@@ -948,6 +948,63 @@ Assisted customers and maintained stock."
       }
     }
 
+function updateEducationInstitutions() {
+
+  const level =
+    document.getElementById("educationLevel").value;
+
+  const datalist =
+    document.getElementById("educationInstitutions");
+
+  datalist.innerHTML = "";
+
+  let institutions = [];
+
+  if (level === "school") {
+    institutions = [
+      "Folweni High School",
+      "Other / Type School Name"
+    ];
+  }
+
+  if (level === "tvet") {
+    institutions =
+      KZN_EDUCATION_DATA.tvetColleges;
+  }
+
+  if (level === "university") {
+    institutions =
+      KZN_EDUCATION_DATA.universities;
+  }
+
+  if (level === "universityTechnology") {
+    institutions =
+      KZN_EDUCATION_DATA.universitiesOfTechnology;
+  }
+
+  if (level === "private") {
+    institutions =
+      KZN_EDUCATION_DATA.privateColleges;
+  }
+
+  if (level === "training") {
+    institutions =
+      KZN_EDUCATION_DATA.training;
+  }
+
+  institutions.forEach(function(institution) {
+
+    const option =
+      document.createElement("option");
+
+    option.value = institution;
+
+    datalist.appendChild(option);
+
+  });
+
+}
+
 
     function generateCV() {
 
