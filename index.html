@@ -550,23 +550,64 @@ ABC High School
 </div>
 
       <div class="field">
-        <label for="experience">
-          Work Experience
-        </label>
 
-        <textarea
-          id="experience"
-          placeholder="Example:
+  <label>
+    Work Experience
+  </label>
+
+  <p style="font-size:13px;color:#666;margin:0 0 10px;">
+    Do you have previous work experience?
+  </p>
+
+  <select
+    id="experienceStatus"
+    style="
+      width:100%;
+      padding:12px;
+      border:1px solid #ccc;
+      border-radius:7px;
+      font-size:15px;
+    "
+    onchange="toggleExperienceFields()"
+  >
+
+    <option value="none">
+      No work experience
+    </option>
+
+    <option value="yes">
+      I have work experience
+    </option>
+
+  </select>
+
+
+  <div
+    id="experienceFields"
+    style="display:none;margin-top:15px;"
+  >
+
+    <label
+      for="experience"
+      style="display:block;margin-bottom:7px;font-weight:700;"
+    >
+      Tell us about your experience
+    </label>
+
+    <textarea
+      id="experience"
+      placeholder="Example:
 
 Sales Assistant
 ABC Store
 January 2025 - June 2025
 
-Assisted customers and maintained stock.
+Assisted customers and maintained stock."
+    ></textarea>
 
-Leave blank if you have no work experience."
-        ></textarea>
-      </div>
+  </div>
+
+</div>
 
       <div class="field">
         <label for="certificates">
