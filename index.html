@@ -1847,6 +1847,19 @@ function updateEducationYear() {
     return profile;
   }
 
+function startCV() {
+
+  document.getElementById("welcomeSection").style.display = "none";
+
+  document.getElementById("formSection").style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
 
   /* =========================
      GENERATE CV
