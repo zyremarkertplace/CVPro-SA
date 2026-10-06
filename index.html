@@ -786,7 +786,68 @@ Leave blank if you have no work experience."
       const email = getValue("email");
       const location = getValue("location");
 
-      const profile = getValue("profile");
+      let profile = getValue("profile");
+
+if (!profile) {
+  const jobStatus = document.getElementById("jobStatus").value;
+
+  const strengths = Array.from(
+    document.querySelectorAll('input[name="strength"]:checked')
+  ).map(input => input.value);
+
+  const strengthText = [];
+
+  if (strengths.includes("communication")) {
+    strengthText.push("strong communication skills");
+  }
+
+  if (strengths.includes("teamwork")) {
+    strengthText.push("teamwork");
+  }
+
+  if (strengths.includes("problem-solving")) {
+    strengthText.push("problem-solving skills");
+  }
+
+  if (strengths.includes("customer-service")) {
+    strengthText.push("customer service");
+  }
+
+  if (strengths.includes("computer")) {
+    strengthText.push("computer skills");
+  }
+
+  if (strengths.includes("hands-on")) {
+    strengthText.push("a practical and hands-on approach to work");
+  }
+
+  let experienceText;
+
+  if (jobStatus === "no-experience") {
+    experienceText =
+      "a motivated individual seeking an opportunity to gain valuable workplace experience";
+  } else if (jobStatus === "some-experience") {
+    experienceText =
+      "an individual with some workplace experience who is eager to continue developing professionally";
+  } else {
+    experienceText =
+      "an experienced and dependable worker seeking a suitable opportunity";
+  }
+
+  if (strengthText.length > 0) {
+    profile =
+      "I am " +
+      experienceText +
+      ". I have " +
+      strengthText.join(", ") +
+      " and I am committed to learning, working well with others and contributing positively to the workplace.";
+  } else {
+    profile =
+      "I am " +
+      experienceText +
+      ". I am hardworking, willing to learn and committed to contributing positively to the workplace.";
+  }
+}
       const education = getValue("education");
       const skills = getValue("skills");
       const experience = getValue("experience");
