@@ -1814,6 +1814,12 @@ function updateEducationYear() {
     const profile =
       generateProfile();
 
+setSection(
+  "profileSection",
+  "cvProfile",
+  formatText(profile)
+);
+
 
     const educationQualification =
       getValue("educationQualification");
