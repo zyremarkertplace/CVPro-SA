@@ -2377,7 +2377,8 @@ setSection(
 
   function downloadCV() {
 
-  const cv = document.getElementById("cv");
+  const cv =
+    document.getElementById("cv");
 
   if (!cv) {
     alert("Please generate your CV first.");
@@ -2392,32 +2393,102 @@ setSection(
       ? fullName.replace(/[^a-z0-9]+/gi, "_")
       : "CV";
 
+  // Make sure the complete CV is visible before capture
+  const originalWidth = cv.style.width;
+  const originalMaxWidth = cv.style.maxWidth;
+  const originalHeight = cv.style.height;
+  const originalMinHeight = cv.style.minHeight;
+  const originalOverflow = cv.style.overflow;
+
+  cv.style.width = "794px";
+  cv.style.maxWidth = "794px";
+  cv.style.height = "auto";
+  cv.style.minHeight = "auto";
+  cv.style.overflow = "visible";
+
   const options = {
+
     margin: [10, 10, 10, 10],
-    filename: safeName + "_CV.pdf",
+
+    filename:
+      safeName + "_CV.pdf",
+
     image: {
       type: "jpeg",
       quality: 0.98
     },
+
     html2canvas: {
       scale: 2,
       useCORS: true,
-      backgroundColor: "#ffffff"
+      backgroundColor: "#ffffff",
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: 794
     },
+
     jsPDF: {
       unit: "mm",
       format: "a4",
       orientation: "portrait"
     },
+
     pagebreak: {
-  mode: ["css", "legacy"]
-}
+      mode: ["css", "legacy"]
+    }
+
   };
 
   html2pdf()
     .set(options)
     .from(cv)
-    .save();
+    .toPdf()
+    .get("pdf")
+    .then(function(pdf) {
+
+      const totalPages =
+        pdf.internal.getNumberOfPages();
+
+      for (
+        let page = 1;
+        page <= totalPages;
+        page++
+      ) {
+
+        pdf.setPage(page);
+      }
+
+    })
+    .save()
+    .then(function() {
+
+      // Restore the original CV styling
+      cv.style.width = originalWidth;
+      cv.style.maxWidth = originalMaxWidth;
+      cv.style.height = originalHeight;
+      cv.style.minHeight = originalMinHeight;
+      cv.style.overflow = originalOverflow;
+
+    })
+    .catch(function(error) {
+
+      // Restore the original CV styling
+      cv.style.width = originalWidth;
+      cv.style.maxWidth = originalMaxWidth;
+      cv.style.height = originalHeight;
+      cv.style.minHeight = originalMinHeight;
+      cv.style.overflow = originalOverflow;
+
+      console.error(
+        "PDF generation error:",
+        error
+      );
+
+      alert(
+        "There was a problem creating the PDF. Please try again."
+      );
+
+    });
 
 }
 
