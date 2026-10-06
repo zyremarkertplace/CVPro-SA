@@ -1339,6 +1339,74 @@ function updateEducationQualification() {
 
 }
 
+function updateSubjects() {
+
+  const level =
+    document.getElementById("educationLevel").value;
+
+  const field =
+    document.getElementById("subjectsField");
+
+  const container =
+    document.getElementById("subjectsOptions");
+
+  container.innerHTML = "";
+
+  if (level !== "school") {
+
+    field.style.display = "none";
+
+    return;
+
+  }
+
+  field.style.display = "block";
+
+  const subjects = [
+
+    "English",
+    "isiZulu",
+    "Mathematics",
+    "Mathematical Literacy",
+    "Physical Sciences",
+    "Life Sciences",
+    "Geography",
+    "History",
+    "Business Studies",
+    "Economics",
+    "Accounting",
+    "Computer Applications Technology",
+    "Information Technology",
+    "Engineering Graphics and Design",
+    "Mechanical Technology",
+    "Civil Technology",
+    "Electrical Technology",
+    "Life Orientation"
+
+  ];
+
+  subjects.forEach(function(subject) {
+
+    const label =
+      document.createElement("label");
+
+    label.style.fontWeight = "400";
+
+    label.innerHTML = `
+      <input
+        type="checkbox"
+        name="subject"
+        value="${subject}"
+      >
+      ${subject}
+    `;
+
+    container.appendChild(label);
+
+  });
+
+}
+
 function updateEducationYear() {
 
   const year =
