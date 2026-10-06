@@ -2548,6 +2548,30 @@ setSection(
 
   }
 
+function selectTemplate(template) {
+
+  const input =
+    document.getElementById("cvTemplate");
+
+  const cards =
+    document.querySelectorAll(".template-card");
+
+  input.value = template;
+
+  cards.forEach(function(card) {
+
+    card.classList.remove("selected");
+
+    if (
+      card.dataset.template === template
+    ) {
+      card.classList.add("selected");
+    }
+
+  });
+
+}
+
 
   /* =========================
      EDIT CV
