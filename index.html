@@ -1839,6 +1839,26 @@ function updateEducationYear() {
       return;
     }
 
+const educationLevel =
+  getValue("educationLevel");
+
+const educationInstitution =
+  getValue("educationInstitution");
+
+const educationQualification =
+  getValue("educationQualification");
+
+if (
+  !educationLevel ||
+  !educationInstitution ||
+  !educationQualification
+) {
+  alert(
+    "Please complete your education details before generating your CV."
+  );
+  return;
+}
+
 
     const profile =
       generateProfile();
@@ -1848,13 +1868,6 @@ setSection(
   "cvProfile",
   formatText(profile)
 );
-
-
-    const educationQualification =
-      getValue("educationQualification");
-
-    const educationInstitution =
-      getValue("educationInstitution");
 
   const educationYear =
   getValue("educationYear");
