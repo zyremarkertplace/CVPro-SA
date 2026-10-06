@@ -2019,89 +2019,212 @@ function updateEducationYear() {
 
   function generateProfile() {
 
-    let profile =
-      getValue("profile");
+  let profile =
+    getValue("profile");
 
-    if (profile) {
-      return profile;
-    }
+  if (profile) {
+    return profile;
+  }
 
-    const experienceStatus =
-  document.getElementById("experienceStatus").value;
+  const experienceStatus =
+    document.getElementById("experienceStatus").value;
 
-    const strengths =
-      Array.from(
-        document.querySelectorAll(
-          'input[name="strength"]:checked'
-        )
-      ).map(input => input.value);
+  const strengths =
+    Array.from(
+      document.querySelectorAll(
+        'input[name="strength"]:checked'
+      )
+    ).map(input => input.value);
 
-    const strengthText = [];
+  const selectedSubjects =
+    Array.from(
+      document.querySelectorAll(
+        'input[name="subject"]:checked'
+      )
+    ).map(input => input.value.toLowerCase());
 
+  const educationLevel =
+    document.getElementById("educationLevel").value;
 
-    if (strengths.includes("communication")) {
-      strengthText.push("strong communication skills");
-    }
+  const strengthText = [];
 
-    if (strengths.includes("teamwork")) {
-      strengthText.push("teamwork");
-    }
+  if (strengths.includes("communication")) {
+    strengthText.push("strong communication skills");
+  }
 
-    if (strengths.includes("problem-solving")) {
-      strengthText.push("problem-solving skills");
-    }
+  if (strengths.includes("teamwork")) {
+    strengthText.push("teamwork");
+  }
 
-    if (strengths.includes("customer-service")) {
-      strengthText.push("customer service");
-    }
+  if (strengths.includes("problem-solving")) {
+    strengthText.push("problem-solving skills");
+  }
 
-    if (strengths.includes("computer")) {
-      strengthText.push("computer skills");
-    }
+  if (strengths.includes("customer-service")) {
+    strengthText.push("customer service");
+  }
 
-    if (strengths.includes("hands-on")) {
-      strengthText.push(
-        "a practical and hands-on approach to work"
-      );
-    }
+  if (strengths.includes("computer")) {
+    strengthText.push("computer skills");
+  }
 
+  if (strengths.includes("hands-on")) {
+    strengthText.push(
+      "a practical and hands-on approach to work"
+    );
+  }
 
-    let experienceText;
+  const practicalSkills = [];
 
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("welding") ||
+      subject.includes("metalwork")
+    )
+  ) {
+    practicalSkills.push(
+      "hands-on experience in welding and metalwork"
+    );
+  }
 
-    if (experienceStatus === "none") {
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("mechanical technology")
+    )
+  ) {
+    practicalSkills.push(
+      "practical skills developed through Mechanical Technology"
+    );
+  }
 
-  experienceText =
-    "a motivated individual seeking an opportunity to gain valuable workplace experience";
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("engineering graphics") ||
+      subject.includes("design")
+    )
+  ) {
+    practicalSkills.push(
+      "technical drawing and design skills"
+    );
+  }
 
-} else {
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("electrical technology")
+    )
+  ) {
+    practicalSkills.push(
+      "practical exposure to electrical technology"
+    );
+  }
 
-  experienceText =
-    "an individual with workplace experience who is eager to continue developing professionally";
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("civil technology") ||
+      subject.includes("construction")
+    )
+  ) {
+    practicalSkills.push(
+      "practical construction and civil technology skills"
+    );
+  }
 
-}
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("computer applications technology") ||
+      subject.includes("information technology")
+    )
+  ) {
+    practicalSkills.push(
+      "computer and digital skills"
+    );
+  }
 
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("agricultural")
+    )
+  ) {
+    practicalSkills.push(
+      "practical agricultural skills"
+    );
+  }
+
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("hospitality")
+    )
+  ) {
+    practicalSkills.push(
+      "hospitality and teamwork skills"
+    );
+  }
+
+  if (
+    selectedSubjects.some(subject =>
+      subject.includes("consumer studies")
+    )
+  ) {
+    practicalSkills.push(
+      "practical problem-solving and organisational skills"
+    );
+  }
+
+  let experienceText;
+
+  if (experienceStatus === "none") {
+
+    experienceText =
+      "a motivated individual seeking an opportunity to gain valuable workplace experience";
+
+  } else {
+
+    experienceText =
+      "an individual with workplace experience who is eager to continue developing professionally";
+
+  }
+
+  if (practicalSkills.length > 0) {
+
+    profile =
+      "I am " +
+      experienceText +
+      ". My education has helped me develop " +
+      practicalSkills.join(", ") +
+      ".";
 
     if (strengthText.length > 0) {
 
-      profile =
-        "I am " +
-        experienceText +
-        ". I have " +
+      profile +=
+        " I also have " +
         strengthText.join(", ") +
-        " and I am committed to learning, working well with others and contributing positively to the workplace.";
-
-    } else {
-
-      profile =
-        "I am " +
-        experienceText +
-        ". I am hardworking, willing to learn and committed to contributing positively to the workplace.";
+        ".";
 
     }
 
-    return profile;
+    profile +=
+      " I am committed to learning, working well with others and contributing positively to the workplace.";
+
+  } else if (strengthText.length > 0) {
+
+    profile =
+      "I am " +
+      experienceText +
+      ". I have " +
+      strengthText.join(", ") +
+      " and I am committed to learning, working well with others and contributing positively to the workplace.";
+
+  } else {
+
+    profile =
+      "I am " +
+      experienceText +
+      ". I am hardworking, willing to learn and committed to contributing positively to the workplace.";
+
   }
+
+  return profile;
+}
 
 function startCV() {
 
