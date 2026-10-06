@@ -1849,9 +1849,19 @@ function updateEducationYear() {
 
 function startCV() {
 
-  document.getElementById("welcomeSection").style.display = "none";
+  const welcome =
+    document.getElementById("welcomeSection");
 
-  document.getElementById("formSection").style.display = "block";
+  const form =
+    document.getElementById("formSection");
+
+  if (!welcome || !form) {
+    alert("CV Builder could not open the form.");
+    return;
+  }
+
+  welcome.style.display = "none";
+  form.style.display = "block";
 
   window.scrollTo({
     top: 0,
