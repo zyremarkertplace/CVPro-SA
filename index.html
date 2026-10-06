@@ -823,15 +823,98 @@ Assisted customers and maintained stock."
 </div>
 
       <div class="field">
-        <label for="additional">
-          Additional Information
-        </label>
 
-        <textarea
-          id="additional"
-          placeholder="Optional: driver's licence, availability, volunteer work, achievements, etc."
-        ></textarea>
-      </div>
+  <label>
+    Additional Information
+  </label>
+
+  <p style="font-size:13px;color:#666;margin:0 0 10px;">
+    Select any information you would like to include on your CV.
+  </p>
+
+  <div
+    style="
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    "
+  >
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Available immediately"
+      >
+      Available immediately
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Willing to learn"
+      >
+      Willing to learn
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Willing to work shifts"
+      >
+      Willing to work shifts
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Willing to relocate"
+      >
+      Willing to relocate
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Driver's Licence"
+      >
+      Driver's Licence
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Own transport"
+      >
+      Own transport
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="Volunteer experience"
+      >
+      Volunteer experience
+    </label>
+
+    <label style="font-weight:400;">
+      <input
+        type="checkbox"
+        name="additionalInfo"
+        value="References available on request"
+      >
+      References available on request
+    </label>
+
+  </div>
+
+</div>
 
       <button
         class="button generate-button"
@@ -1586,8 +1669,15 @@ function updateEducationYear() {
 const languages =
   selectedLanguages.join(", ");
 
-    const additional =
-      getValue("additional");
+  const selectedAdditionalInfo =
+  Array.from(
+    document.querySelectorAll(
+      'input[name="additionalInfo"]:checked'
+    )
+  ).map(input => input.value);
+
+const additional =
+  selectedAdditionalInfo.join(", ");
 
 
     document.getElementById(
