@@ -2648,42 +2648,30 @@ if (experienceStatus === "none") {
   }
 
 
-  const experienceParts = [];
+  let experienceHTML = `
+  <div class="cv-experience-item">
 
+    <div class="cv-experience-job">
+      ${escapeHTML(jobTitle)}
+    </div>
 
-  experienceParts.push(
-    "<strong>" +
-    escapeHTML(jobTitle) +
-    "</strong>"
-  );
+    <div class="cv-experience-company">
+      ${escapeHTML(company)}
+    </div>
 
+    <div class="cv-experience-dates">
+      ${escapeHTML(startDate)} - ${escapeHTML(endDate)}
+    </div>
 
-  experienceParts.push(
-    escapeHTML(company)
-  );
+    <div class="cv-experience-responsibilities">
+      ${formatText(responsibilities)}
+    </div>
 
+  </div>
+`;
 
-  experienceParts.push(
-    escapeHTML(startDate) +
-    " - " +
-    escapeHTML(endDate)
-  );
-
-
-  let experienceHTML =
-    "<div style=\"margin-bottom:10px;\">" +
-    experienceParts.join(" | ") +
-    "</div>";
-
-
-  experienceHTML +=
-    "<div>" +
-    formatText(responsibilities) +
-    "</div>";
-
-
-  experience =
-    experienceHTML;
+experience =
+  experienceHTML;
 
 }
 
