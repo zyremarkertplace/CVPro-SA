@@ -1801,6 +1801,173 @@ Assisted customers, organised stock and supported daily store operations."
 
 </section>
 
+<section
+  id="jobTrackerSection"
+  class="card"
+  style="display:none;"
+>
+
+  <h2>Job Application Tracker</h2>
+
+  <p>
+    Keep track of the jobs you have applied for
+    and manage your applications in one place.
+  </p>
+
+  <div class="field">
+
+    <label for="jobCompany">
+      Company Name
+    </label>
+
+    <input
+      id="jobCompany"
+      type="text"
+      placeholder="e.g. Boxer Superstores"
+    >
+
+  </div>
+
+  <div class="field">
+
+    <label for="jobTitle">
+      Job Title
+    </label>
+
+    <input
+      id="jobTitle"
+      type="text"
+      placeholder="e.g. Shop Assistant"
+    >
+
+  </div>
+
+  <div class="field">
+
+    <label for="jobReference">
+      Job Reference
+      <span style="color:#777;font-weight:normal;">
+        (Optional)
+      </span>
+    </label>
+
+    <input
+      id="jobReference"
+      type="text"
+      placeholder="e.g. REF-2026-001"
+    >
+
+  </div>
+
+  <div class="field">
+
+    <label for="jobApplicationDate">
+      Application Date
+    </label>
+
+    <input
+      id="jobApplicationDate"
+      type="date"
+    >
+
+  </div>
+
+  <div class="field">
+
+    <label for="jobStatus">
+      Application Status
+    </label>
+
+    <select
+      id="jobStatus"
+      style="
+        width:100%;
+        padding:12px;
+        border:1px solid #ccc;
+        border-radius:7px;
+        font-size:15px;
+      "
+    >
+
+      <option value="Applied">
+        Applied
+      </option>
+
+      <option value="Under Review">
+        Under Review
+      </option>
+
+      <option value="Interview">
+        Interview
+      </option>
+
+      <option value="Offer">
+        Offer
+      </option>
+
+      <option value="Rejected">
+        Not Selected
+      </option>
+
+      <option value="Withdrawn">
+        Withdrawn
+      </option>
+
+    </select>
+
+  </div>
+
+  <div class="field">
+
+    <label for="jobLink">
+      Job Application Link
+      <span style="color:#777;font-weight:normal;">
+        (Optional)
+      </span>
+    </label>
+
+    <input
+      id="jobLink"
+      type="url"
+      placeholder="https://example.com/job"
+    >
+
+  </div>
+
+  <div class="field">
+
+    <label for="jobNotes">
+      Notes
+      <span style="color:#777;font-weight:normal;">
+        (Optional)
+      </span>
+    </label>
+
+    <textarea
+      id="jobNotes"
+      placeholder="Add notes about this application..."
+    ></textarea>
+
+  </div>
+
+  <button
+    class="button generate-button"
+    type="button"
+    onclick="saveJobApplication()"
+  >
+    Save Application
+  </button>
+
+  <button
+    class="button back-button"
+    type="button"
+    onclick="backToCV()"
+  >
+    Back to CV
+  </button>
+
+</section>
+
   </main>
 
 
