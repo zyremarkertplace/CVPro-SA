@@ -3762,6 +3762,127 @@ function generateCoverLetter() {
 }
 
 
+
+function downloadCoverLetter() {
+
+  const coverLetter =
+    document.getElementById(
+      "coverLetterPreview"
+    );
+
+  if (!coverLetter) {
+    alert("Please generate your cover letter first.");
+    return;
+  }
+
+  const fullName =
+    document.getElementById(
+      "fullName"
+    ).value.trim();
+
+  const safeName =
+    fullName
+      ? fullName.replace(/[^a-z0-9]+/gi, "_")
+      : "Cover_Letter";
+
+  const originalWidth =
+    coverLetter.style.width;
+
+  const originalMaxWidth =
+    coverLetter.style.maxWidth;
+
+  const originalHeight =
+    coverLetter.style.height;
+
+  const originalOverflow =
+    coverLetter.style.overflow;
+
+  coverLetter.style.width = "794px";
+  coverLetter.style.maxWidth = "794px";
+  coverLetter.style.height = "auto";
+  coverLetter.style.overflow = "visible";
+
+  const options = {
+
+    margin: [5, 5, 5, 5],
+
+    filename:
+      safeName + "_Cover_Letter.pdf",
+
+    image: {
+      type: "jpeg",
+      quality: 0.98
+    },
+
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+      scrollX: 0,
+      scrollY: 0,
+      windowWidth: 794
+    },
+
+    jsPDF: {
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait"
+    },
+
+    pagebreak: {
+      mode: ["css"]
+    }
+
+  };
+
+  html2pdf()
+    .set(options)
+    .from(coverLetter)
+    .toPdf()
+    .save()
+    .then(function() {
+
+      coverLetter.style.width =
+        originalWidth;
+
+      coverLetter.style.maxWidth =
+        originalMaxWidth;
+
+      coverLetter.style.height =
+        originalHeight;
+
+      coverLetter.style.overflow =
+        originalOverflow;
+
+    })
+    .catch(function(error) {
+
+      coverLetter.style.width =
+        originalWidth;
+
+      coverLetter.style.maxWidth =
+        originalMaxWidth;
+
+      coverLetter.style.height =
+        originalHeight;
+
+      coverLetter.style.overflow =
+        originalOverflow;
+
+      console.error(
+        "Cover letter PDF generation error:",
+        error
+      );
+
+      alert(
+        "There was a problem creating the cover letter PDF. Please try again."
+      );
+
+    });
+
+}
+
+
   /* =========================
      WORK EXPERIENCE
   ========================= */
