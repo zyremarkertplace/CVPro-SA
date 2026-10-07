@@ -3320,6 +3320,37 @@ function startCoverLetter() {
 
 }
 
+
+function startJobTracker() {
+
+  const cvSection =
+    document.getElementById(
+      "cvSection"
+    );
+
+  const jobTrackerSection =
+    document.getElementById(
+      "jobTrackerSection"
+    );
+
+  if (!cvSection || !jobTrackerSection) {
+    alert("Job Application Tracker could not be opened.");
+    return;
+  }
+
+  cvSection.style.display =
+    "none";
+
+  jobTrackerSection.style.display =
+    "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
 function backToCV() {
 
   const coverLetterSection =
