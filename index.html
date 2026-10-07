@@ -2965,13 +2965,23 @@ function selectTemplate(template) {
       ? fullName.replace(/[^a-z0-9]+/gi, "_")
       : "CV";
 
-  // Make sure the complete CV is visible before capture
-  const originalWidth = cv.style.width;
-  const originalMaxWidth = cv.style.maxWidth;
-  const originalHeight = cv.style.height;
-  const originalMinHeight = cv.style.minHeight;
-  const originalOverflow = cv.style.overflow;
+  // Save original CV styling
+  const originalWidth =
+    cv.style.width;
 
+  const originalMaxWidth =
+    cv.style.maxWidth;
+
+  const originalHeight =
+    cv.style.height;
+
+  const originalMinHeight =
+    cv.style.minHeight;
+
+  const originalOverflow =
+    cv.style.overflow;
+
+  // Prepare CV for PDF capture
   cv.style.width = "794px";
   cv.style.maxWidth = "794px";
   cv.style.height = "auto";
@@ -3015,41 +3025,43 @@ function selectTemplate(template) {
     .set(options)
     .from(cv)
     .toPdf()
-    .get("pdf")
-    .then(function(pdf) {
-
-      const totalPages =
-        pdf.internal.getNumberOfPages();
-
-      for (
-        let page = 1;
-        page <= totalPages;
-        page++
-      ) {
-
-        pdf.setPage(page);
-      }
-
-    })
     .save()
     .then(function() {
 
-      // Restore the original CV styling
-      cv.style.width = originalWidth;
-      cv.style.maxWidth = originalMaxWidth;
-      cv.style.height = originalHeight;
-      cv.style.minHeight = originalMinHeight;
-      cv.style.overflow = originalOverflow;
+      // Restore original CV styling
+      cv.style.width =
+        originalWidth;
+
+      cv.style.maxWidth =
+        originalMaxWidth;
+
+      cv.style.height =
+        originalHeight;
+
+      cv.style.minHeight =
+        originalMinHeight;
+
+      cv.style.overflow =
+        originalOverflow;
 
     })
     .catch(function(error) {
 
-      // Restore the original CV styling
-      cv.style.width = originalWidth;
-      cv.style.maxWidth = originalMaxWidth;
-      cv.style.height = originalHeight;
-      cv.style.minHeight = originalMinHeight;
-      cv.style.overflow = originalOverflow;
+      // Restore original CV styling
+      cv.style.width =
+        originalWidth;
+
+      cv.style.maxWidth =
+        originalMaxWidth;
+
+      cv.style.height =
+        originalHeight;
+
+      cv.style.minHeight =
+        originalMinHeight;
+
+      cv.style.overflow =
+        originalOverflow;
 
       console.error(
         "PDF generation error:",
