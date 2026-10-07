@@ -3351,6 +3351,139 @@ function startJobTracker() {
 
 }
 
+function saveJobApplication() {
+
+  const company =
+    getValue("jobCompany");
+
+  const jobTitle =
+    getValue("jobTitle");
+
+  const reference =
+    getValue("jobReference");
+
+  const applicationDate =
+    getValue("jobApplicationDate");
+
+  const status =
+    getValue("jobStatus");
+
+  const jobLink =
+    getValue("jobLink");
+
+  const notes =
+    getValue("jobNotes");
+
+  if (!company) {
+    alert("Please enter the Company Name.");
+    return;
+  }
+
+  if (!jobTitle) {
+    alert("Please enter the Job Title.");
+    return;
+  }
+
+  if (!applicationDate) {
+    alert("Please enter the Application Date.");
+    return;
+  }
+
+  const application = {
+
+    id:
+      Date.now(),
+
+    company:
+      company,
+
+    jobTitle:
+      jobTitle,
+
+    reference:
+      reference,
+
+    applicationDate:
+      applicationDate,
+
+    status:
+      status,
+
+    jobLink:
+      jobLink,
+
+    notes:
+      notes
+
+  };
+
+
+  let applications = [];
+
+  try {
+
+    applications =
+      JSON.parse(
+        localStorage.getItem(
+          "cvBuilderJobApplications"
+        )
+      ) || [];
+
+  } catch (error) {
+
+    applications = [];
+
+  }
+
+
+  applications.push(
+    application
+  );
+
+
+  localStorage.setItem(
+    "cvBuilderJobApplications",
+    JSON.stringify(
+      applications
+    )
+  );
+
+
+  alert(
+    "Job application saved successfully."
+  );
+
+
+  document.getElementById(
+    "jobCompany"
+  ).value = "";
+
+  document.getElementById(
+    "jobTitle"
+  ).value = "";
+
+  document.getElementById(
+    "jobReference"
+  ).value = "";
+
+  document.getElementById(
+    "jobApplicationDate"
+  ).value = "";
+
+  document.getElementById(
+    "jobStatus"
+  ).value = "Applied";
+
+  document.getElementById(
+    "jobLink"
+  ).value = "";
+
+  document.getElementById(
+    "jobNotes"
+  ).value = "";
+
+}
+
 function backToCV() {
 
   const coverLetterSection =
