@@ -1994,6 +1994,20 @@ Assisted customers, organised stock and supported daily store operations."
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
+const PAYMENT_SUPABASE_URL =
+  "https://tnxlhpenttcynlmlohao.supabase.co";
+
+const PAYMENT_SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_n4XzrnraET_AEMbCYtHV7Q_DJ8--zCL";
+
+const paymentClient =
+  window.supabase.createClient(
+    PAYMENT_SUPABASE_URL,
+    PAYMENT_SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
+
+<script>
 
   function getValue(id) {
     const element = document.getElementById(id);
