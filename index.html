@@ -3152,6 +3152,8 @@ function startCoverLetter() {
 
 }
 
+
+
 function generateCoverLetter() {
 
   const jobTitle =
@@ -3163,12 +3165,6 @@ function generateCoverLetter() {
   const reference =
     getValue("coverLetterReference");
 
-  const interest =
-    getValue("coverLetterInterest");
-
-  const relevantSkills =
-    getValue("coverLetterSkills");
-
   if (!jobTitle) {
     alert("Please enter the Job Title.");
     return;
@@ -3176,16 +3172,6 @@ function generateCoverLetter() {
 
   if (!company) {
     alert("Please enter the Company Name.");
-    return;
-  }
-
-  if (!interest) {
-    alert("Please explain why you are interested in this job.");
-    return;
-  }
-
-  if (!relevantSkills) {
-    alert("Please enter your relevant skills or experience.");
     return;
   }
 
@@ -3201,6 +3187,226 @@ function generateCoverLetter() {
   const location =
     getValue("location");
 
+  /* =========================
+     GET SKILLS FROM CV
+  ========================= */
+
+  const selectedSkills =
+    Array.from(
+      document.querySelectorAll(
+        'input[name="skill"]:checked'
+      )
+    ).map(input => input.value);
+
+  const selectedSubjects =
+    Array.from(
+      document.querySelectorAll(
+        'input[name="subject"]:checked'
+      )
+    ).map(input => input.value);
+
+  const experienceStatus =
+    document.getElementById(
+      "experienceStatus"
+    ).value;
+
+  const jobExperience =
+    getValue("experienceJobTitle");
+
+  const companyExperience =
+    getValue("experienceCompany");
+
+  const profile =
+    generateProfile();
+
+
+  /* =========================
+     BUILD AUTOMATIC SKILLS
+  ========================= */
+
+  const automaticSkills = [
+    ...selectedSkills
+  ];
+
+  selectedSubjects.forEach(function(subject) {
+
+    const lower =
+      subject.toLowerCase();
+
+    if (
+      lower.includes("welding") ||
+      lower.includes("metalwork")
+    ) {
+      automaticSkills.push(
+        "Welding and Metalwork"
+      );
+    }
+
+    if (
+      lower.includes("mechanical technology")
+    ) {
+      automaticSkills.push(
+        "Mechanical Technology"
+      );
+    }
+
+    if (
+      lower.includes("engineering graphics") ||
+      lower.includes("design")
+    ) {
+      automaticSkills.push(
+        "Technical Drawing and Design"
+      );
+    }
+
+    if (
+      lower.includes("electrical technology")
+    ) {
+      automaticSkills.push(
+        "Electrical Technology"
+      );
+    }
+
+    if (
+      lower.includes("civil technology") ||
+      lower.includes("construction")
+    ) {
+      automaticSkills.push(
+        "Construction and Civil Technology"
+      );
+    }
+
+    if (
+      lower.includes("computer applications technology") ||
+      lower.includes("information technology")
+    ) {
+      automaticSkills.push(
+        "Computer and Digital Skills"
+      );
+    }
+
+    if (
+      lower.includes("hospitality")
+    ) {
+      automaticSkills.push(
+        "Hospitality Skills"
+      );
+    }
+
+    if (
+      lower.includes("agricultural")
+    ) {
+      automaticSkills.push(
+        "Agricultural Skills"
+      );
+    }
+
+  });
+
+
+  /* =========================
+     REMOVE DUPLICATES
+  ========================= */
+
+  const uniqueSkills =
+    [...new Set(automaticSkills)];
+
+
+  /* =========================
+     GENERATE SKILLS TEXT
+  ========================= */
+
+  let skillsText = "";
+
+  if (uniqueSkills.length > 0) {
+
+    skillsText =
+      "My key skills include " +
+      uniqueSkills
+        .slice(0, 8)
+        .join(", ") +
+      ".";
+
+  } else {
+
+    skillsText =
+      "I am a hardworking and motivated individual with strong communication, teamwork and problem-solving abilities.";
+
+  }
+
+
+  /* =========================
+     GENERATE APPLICATION REASON
+  ========================= */
+
+  const reasons = [
+
+    `I am interested in the ${jobTitle} position because I believe it would give me an opportunity to use my existing skills while continuing to learn and develop professionally.`,
+
+    `I am applying for the ${jobTitle} position because I would like to build my experience in a professional working environment and make a positive contribution to ${company}.`,
+
+    `I am interested in joining ${company} as a ${jobTitle} because I am eager to gain valuable workplace experience, develop my abilities and contribute to a successful team.`,
+
+    `The ${jobTitle} position interests me because it matches my strengths and gives me an opportunity to grow, learn new skills and take on new responsibilities.`,
+
+    `I would like to be considered for the ${jobTitle} position because I am motivated to develop my career and believe my attitude, skills and willingness to learn would allow me to contribute positively to ${company}.`
+
+  ];
+
+
+  /*
+    Use the job title and company name
+    to select a reason automatically.
+    This gives different jobs/companies
+    different professional wording.
+  */
+
+  const reasonSeed =
+    (
+      jobTitle +
+      company
+    )
+      .split("")
+      .reduce(
+        function(total, character) {
+          return total + character.charCodeAt(0);
+        },
+        0
+      );
+
+  const selectedReason =
+    reasons[
+      reasonSeed % reasons.length
+    ];
+
+
+  /* =========================
+     GENERATE EXPERIENCE TEXT
+  ========================= */
+
+  let experienceText = "";
+
+  if (
+    experienceStatus === "yes" &&
+    jobExperience &&
+    companyExperience
+  ) {
+
+    experienceText =
+      `I also have previous experience as a ${jobExperience} at ${companyExperience}, where I developed practical workplace skills and gained experience working responsibly in a professional environment.`;
+
+  } else {
+
+    experienceText =
+      `My education and personal development have helped me build practical skills, a strong work ethic and a willingness to learn. I am ready to apply these qualities in the workplace.`;
+
+  }
+
+
+  /* =========================
+     DISPLAY APPLICANT DETAILS
+  ========================= */
+
   document.getElementById(
     "coverLetterName"
   ).textContent =
@@ -3212,6 +3418,7 @@ function generateCoverLetter() {
     [phone, email, location]
       .filter(Boolean)
       .join(" • ");
+
 
   const today =
     new Date().toLocaleDateString(
@@ -3228,10 +3435,12 @@ function generateCoverLetter() {
   ).textContent =
     today;
 
+
   document.getElementById(
     "coverLetterRecipient"
   ).textContent =
     company;
+
 
   const referenceOutput =
     document.getElementById(
@@ -3256,6 +3465,11 @@ function generateCoverLetter() {
 
   }
 
+
+  /* =========================
+     BUILD COVER LETTER
+  ========================= */
+
   const body =
     `
       <p>Dear Hiring Manager,</p>
@@ -3268,11 +3482,15 @@ function generateCoverLetter() {
       </p>
 
       <p>
-        ${formatText(interest)}
+        ${escapeHTML(selectedReason)}
       </p>
 
       <p>
-        ${formatText(relevantSkills)}
+        ${escapeHTML(skillsText)}
+      </p>
+
+      <p>
+        ${escapeHTML(experienceText)}
       </p>
 
       <p>
@@ -3288,15 +3506,18 @@ function generateCoverLetter() {
       </p>
     `;
 
+
   document.getElementById(
     "coverLetterBody"
   ).innerHTML =
     body;
 
+
   document.getElementById(
     "coverLetterSignature"
   ).textContent =
     fullName;
+
 
   document.getElementById(
     "coverLetterSection"
@@ -3307,6 +3528,7 @@ function generateCoverLetter() {
     "coverLetterPreviewSection"
   ).style.display =
     "block";
+
 
   window.scrollTo({
     top: 0,
