@@ -3145,6 +3145,36 @@ function startCoverLetter() {
 
 }
 
+function backToCV() {
+
+  const coverLetterSection =
+    document.getElementById(
+      "coverLetterSection"
+    );
+
+  const cvSection =
+    document.getElementById(
+      "cvSection"
+    );
+
+  if (!coverLetterSection || !cvSection) {
+    alert("CV section could not be opened.");
+    return;
+  }
+
+  coverLetterSection.style.display =
+    "none";
+
+  cvSection.style.display =
+    "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
 
 function backToCoverLetterForm() {
 
