@@ -3153,6 +3153,34 @@ function startCoverLetter() {
 }
 
 
+function backToCoverLetterForm() {
+
+  const preview =
+    document.getElementById(
+      "coverLetterPreviewSection"
+    );
+
+  const form =
+    document.getElementById(
+      "coverLetterSection"
+    );
+
+  if (!preview || !form) {
+    alert("Cover Letter form could not be opened.");
+    return;
+  }
+
+  preview.style.display = "none";
+
+  form.style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
 
 function generateCoverLetter() {
 
