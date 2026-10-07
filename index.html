@@ -2777,6 +2777,94 @@ function startCV() {
 }
 
 
+async function createPaymentOrder() {
+  const customerName =
+    document.getElementById("fullName")?.value.trim() || "";
+
+  const customerEmail =
+    document.getElementById("email")?.value.trim().toLowerCase() || "";
+
+  const selectedTemplate =
+    document.getElementById("cvTemplate")?.value || "";
+
+  if (!customerName) {
+    alert("Please enter your full name.");
+    return null;
+  }
+
+  if (!customerEmail) {
+    alert("Please enter your email address.");
+    return null;
+  }
+
+  if (!selectedTemplate) {
+    alert("Please select a CV template.");
+    return null;
+  }
+
+  try {
+    const response =
+      await paymentClient.functions.invoke(
+        "create-payment-order",
+        {
+          body: {
+            customer_name: customerName,
+            customer_email: customerEmail,
+            cv_template: selectedTemplate
+          }
+        }
+      );
+
+    if (response.error) {
+      console.error(
+        "Payment order error:",
+        response.error
+      );
+
+      alert(
+        "We could not create your payment order. Please try again."
+      );
+
+      return null;
+    }
+
+    const result = response.data;
+
+    if (!result || !result.success || !result.order) {
+      console.error(
+        "Invalid payment order response:",
+        result
+      );
+
+      alert(
+        "We could not create your payment order. Please try again."
+      );
+
+      return null;
+    }
+
+    console.log(
+      "Payment order created:",
+      result.order
+    );
+
+    return result.order;
+
+  } catch (error) {
+
+    console.error(
+      "Payment order connection error:",
+      error
+    );
+
+    alert(
+      "Unable to connect to the payment system."
+    );
+
+    return null;
+  }
+}
+
   /* =========================
      GENERATE CV
   ========================= */
