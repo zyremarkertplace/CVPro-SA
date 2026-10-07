@@ -2986,6 +2986,30 @@ function selectTemplate(template) {
 
 }
 
+function startCoverLetter() {
+
+  const cvSection =
+    document.getElementById("cvSection");
+
+  const coverLetterSection =
+    document.getElementById("coverLetterSection");
+
+  if (!cvSection || !coverLetterSection) {
+    alert("Cover Letter section could not be opened.");
+    return;
+  }
+
+  cvSection.style.display = "none";
+
+  coverLetterSection.style.display = "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
 
   /* =========================
      EDIT CV
