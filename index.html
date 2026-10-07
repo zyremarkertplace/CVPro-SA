@@ -3325,6 +3325,7 @@ function startCoverLetter() {
 }
 
 
+
 function startJobTracker() {
 
   const cvSection =
@@ -3338,7 +3339,9 @@ function startJobTracker() {
     );
 
   if (!cvSection || !jobTrackerSection) {
-    alert("Job Application Tracker could not be opened.");
+    alert(
+      "Job Application Tracker could not be opened."
+    );
     return;
   }
 
@@ -3354,6 +3357,7 @@ function startJobTracker() {
   });
 
 }
+
 
 function saveJobApplication() {
 
@@ -3488,6 +3492,7 @@ function saveJobApplication() {
 
 }
 
+
 function backToCV() {
 
   const coverLetterSection =
@@ -3495,18 +3500,40 @@ function backToCV() {
       "coverLetterSection"
     );
 
+  const coverLetterPreviewSection =
+    document.getElementById(
+      "coverLetterPreviewSection"
+    );
+
+  const jobTrackerSection =
+    document.getElementById(
+      "jobTrackerSection"
+    );
+
   const cvSection =
     document.getElementById(
       "cvSection"
     );
 
-  if (!coverLetterSection || !cvSection) {
+  if (!cvSection) {
     alert("CV section could not be opened.");
     return;
   }
 
-  coverLetterSection.style.display =
-    "none";
+  if (coverLetterSection) {
+    coverLetterSection.style.display =
+      "none";
+  }
+
+  if (coverLetterPreviewSection) {
+    coverLetterPreviewSection.style.display =
+      "none";
+  }
+
+  if (jobTrackerSection) {
+    jobTrackerSection.style.display =
+      "none";
+  }
 
   cvSection.style.display =
     "block";
