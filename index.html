@@ -3074,6 +3074,169 @@ function startCoverLetter() {
 
 }
 
+function generateCoverLetter() {
+
+  const jobTitle =
+    getValue("coverLetterJobTitle");
+
+  const company =
+    getValue("coverLetterCompany");
+
+  const reference =
+    getValue("coverLetterReference");
+
+  const interest =
+    getValue("coverLetterInterest");
+
+  const relevantSkills =
+    getValue("coverLetterSkills");
+
+  if (!jobTitle) {
+    alert("Please enter the Job Title.");
+    return;
+  }
+
+  if (!company) {
+    alert("Please enter the Company Name.");
+    return;
+  }
+
+  if (!interest) {
+    alert("Please explain why you are interested in this job.");
+    return;
+  }
+
+  if (!relevantSkills) {
+    alert("Please enter your relevant skills or experience.");
+    return;
+  }
+
+  const fullName =
+    getValue("fullName");
+
+  const phone =
+    getValue("phone");
+
+  const email =
+    getValue("email");
+
+  const location =
+    getValue("location");
+
+  document.getElementById(
+    "coverLetterName"
+  ).textContent =
+    fullName.toUpperCase();
+
+  document.getElementById(
+    "coverLetterContact"
+  ).textContent =
+    [phone, email, location]
+      .filter(Boolean)
+      .join(" • ");
+
+  const today =
+    new Date().toLocaleDateString(
+      "en-ZA",
+      {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }
+    );
+
+  document.getElementById(
+    "coverLetterDate"
+  ).textContent =
+    today;
+
+  document.getElementById(
+    "coverLetterRecipient"
+  ).textContent =
+    company;
+
+  const referenceOutput =
+    document.getElementById(
+      "coverLetterReferenceOutput"
+    );
+
+  if (reference) {
+
+    referenceOutput.textContent =
+      "Reference: " + reference;
+
+    referenceOutput.style.display =
+      "block";
+
+  } else {
+
+    referenceOutput.textContent =
+      "";
+
+    referenceOutput.style.display =
+      "none";
+
+  }
+
+  const body =
+    `
+      <p>Dear Hiring Manager,</p>
+
+      <p>
+        I am writing to apply for the
+        <strong>${escapeHTML(jobTitle)}</strong>
+        position at
+        <strong>${escapeHTML(company)}</strong>.
+      </p>
+
+      <p>
+        ${formatText(interest)}
+      </p>
+
+      <p>
+        ${formatText(relevantSkills)}
+      </p>
+
+      <p>
+        I am eager to bring my skills, positive attitude
+        and willingness to learn to your organisation.
+        I would appreciate the opportunity to contribute
+        to your team and discuss my application further.
+      </p>
+
+      <p>
+        Thank you for considering my application.
+        I look forward to hearing from you.
+      </p>
+    `;
+
+  document.getElementById(
+    "coverLetterBody"
+  ).innerHTML =
+    body;
+
+  document.getElementById(
+    "coverLetterSignature"
+  ).textContent =
+    fullName;
+
+  document.getElementById(
+    "coverLetterSection"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "coverLetterPreviewSection"
+  ).style.display =
+    "block";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
 
   /* =========================
      EDIT CV
