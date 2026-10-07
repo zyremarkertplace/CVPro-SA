@@ -1472,6 +1472,14 @@ Assisted customers, organised stock and supported daily store operations."
         Generate My CV
       </button>
 
+
+<button
+  type="button"
+  onclick="testPaymentConnection()"
+>
+  Test Payment Connection
+</button>
+
       <button
         class="button clear-button"
         type="button"
@@ -2864,6 +2872,26 @@ async function createPaymentOrder() {
     return null;
   }
 }
+
+async function testPaymentConnection() {
+
+  const order =
+    await createPaymentOrder();
+
+  if (!order) {
+    return;
+  }
+
+  alert(
+    "Payment system connected successfully!\n\n" +
+    "Order: " + order.order_number + "\n" +
+    "Template: " + order.cv_template + "\n" +
+    "Amount: R" + order.amount
+  );
+
+}
+
+
 
   /* =========================
      GENERATE CV
