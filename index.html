@@ -2832,8 +2832,9 @@ async function createPaymentOrder() {
       );
 
       alert(
-        "We could not create your payment order. Please try again."
-      );
+  "Payment order error:\n\n" +
+  (error?.message || String(error))
+);
 
       return null;
     }
@@ -2847,8 +2848,9 @@ async function createPaymentOrder() {
       );
 
       alert(
-        "We could not create your payment order. Please try again."
-      );
+  "Payment order error:\n\n" +
+  (error?.message || String(error))
+);
 
       return null;
     }
