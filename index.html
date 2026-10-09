@@ -2787,6 +2787,7 @@ function startCV() {
 }
 
 
+
 async function createPaymentOrder() {
   const customerName =
     document.getElementById("fullName")?.value.trim() || "";
@@ -2813,28 +2814,24 @@ async function createPaymentOrder() {
   }
 
   try {
-    const response =
-      await paymentClient.functions.invoke(
-        "create-payment-order",
-        {
-          body: {
-            customer_name: customerName,
-            customer_email: customerEmail,
-            cv_template: selectedTemplate
-          }
+    const response = await paymentClient.functions.invoke(
+      "create-payment-order",
+      {
+        body: {
+          customer_name: customerName,
+          customer_email: customerEmail,
+          cv_template: selectedTemplate
         }
-      );
+      }
+    );
 
     if (response.error) {
-      console.error(
-        "Payment order error:",
-        response.error
-      );
+      console.error("Payment order error:", response.error);
 
       alert(
-  "Payment order error:\n\n" +
-  (error?.message || String(error))
-);
+        "Payment order error:\n\n" +
+        (response.error.message || String(response.error))
+      );
 
       return null;
     }
@@ -2842,63 +2839,31 @@ async function createPaymentOrder() {
     const result = response.data;
 
     if (!result || !result.success || !result.order) {
-      console.error(
-        "Invalid payment order response:",
-        result
-      );
+      console.error("Invalid payment order response:", result);
 
       alert(
-  "Payment order error:\n\n" +
-  (error?.message || String(error))
-);
+        "The server returned an invalid payment order response. Check the browser console."
+      );
 
       return null;
     }
 
-    console.log(
-      "Payment order created:",
-      result.order
-    );
+    console.log("Payment order created:", result.order);
 
     return result.order;
 
   } catch (error) {
+    console.error("Payment order connection error:", error);
 
-  console.error(
-    "Payment order connection error:",
-    error
-  );
+    alert(
+      "Payment order connection error:\n\n" +
+      (error?.message || String(error))
+    );
 
-    
-catch (error) {
-  console.error("Payment order error:", error);
-
-  alert(
-    "Payment order error:\n\n" +
-    (error?.message || String(error))
-  );
-
-  return null;
-}
-}
-
-async function testPaymentConnection() {
-
-  const order =
-    await createPaymentOrder();
-
-  if (!order) {
-    return;
+    return null;
   }
-
-  alert(
-    "Payment system connected successfully!\n\n" +
-    "Order: " + order.order_number + "\n" +
-    "Template: " + order.cv_template + "\n" +
-    "Amount: R" + order.amount
-  );
-
 }
+
 
 
 
