@@ -2864,6 +2864,24 @@ async function createPaymentOrder() {
   }
 }
 
+async function testPaymentConnection() {
+
+const order =
+await createPaymentOrder();
+
+if (!order) {
+return;
+}
+
+alert(
+"Payment system connected successfully!\n\n" +
+"Order: " + order.order_number + "\n" +
+"Template: " + order.cv_template + "\n" +
+"Amount: R" + order.amount
+);
+
+}
+
 
 
 
