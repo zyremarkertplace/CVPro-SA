@@ -2860,17 +2860,18 @@ async function createPaymentOrder() {
 
   } catch (error) {
 
-    console.error(
-      "Payment order connection error:",
-      error
-    );
+  console.error(
+    "Payment order connection error:",
+    error
+  );
 
-    alert(
-      "Unable to connect to the payment system."
-    );
+  alert(
+    "Payment system error:\n\n" +
+    (error?.message || String(error))
+  );
 
-    return null;
-  }
+  return null;
+}
 }
 
 async function testPaymentConnection() {
