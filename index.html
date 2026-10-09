@@ -2869,8 +2869,12 @@ async function createPaymentOrder() {
     error
   );
 
+    
+catch (error) {
+  console.error("Payment order error:", error);
+
   alert(
-    "Payment system error:\n\n" +
+    "Payment order error:\n\n" +
     (error?.message || String(error))
   );
 
