@@ -1811,6 +1811,41 @@ Assisted customers, organised stock and supported daily store operations."
     Download / Save as PDF
   </button>
 
+
+<div id="eftPaymentSection" style="display:none; margin:20px 0; padding:20px; border:1px solid #ddd; border-radius:12px; background:#fff;">
+  <h3>Pay by EFT</h3>
+  <p>Create your payment order to receive your amount and unique payment reference.</p>
+
+  <button
+    class="button generate-button"
+    type="button"
+    onclick="startEFTPayment()"
+  >
+    Create Payment Order
+  </button>
+
+  <div id="eftPaymentDetails" style="display:none; margin-top:20px;">
+    <p><strong>Order number:</strong> <span id="eftOrderNumber"></span></p>
+    <p><strong>CV template:</strong> <span id="eftTemplate"></span></p>
+    <p><strong>Amount to pay:</strong> <span id="eftAmount"></span></p>
+    <p><strong>Payment reference:</strong> <span id="eftReference"></span></p>
+
+    <hr>
+
+    <h4>Bank transfer details</h4>
+    <p><strong>Bank:</strong> Capitec Bank</p>
+    <p><strong>Account holder:</strong> ADD YOUR ACCOUNT HOLDER NAME</p>
+    <p><strong>Account number:</strong> ADD YOUR ACCOUNT NUMBER</p>
+    <p><strong>Branch code:</strong> CONFIRM YOUR DETAILS WITH CAPITEC</p>
+
+    <p>
+      Use the exact payment reference above when making your EFT.
+      Your PDF download will become available after the payment is verified.
+    </p>
+  </div>
+</div>
+
+
   <button
     class="button back-button"
     type="button"
