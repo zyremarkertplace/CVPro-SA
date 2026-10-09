@@ -2919,6 +2919,55 @@ alert(
 
 
 
+async function startEFTPayment() {
+  const button = document.querySelector(
+    '#eftPaymentSection button[onclick="startEFTPayment()"]'
+  );
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Creating payment order...";
+  }
+
+  try {
+    const order = await createPaymentOrder();
+
+    if (!order) {
+      return;
+    }
+
+    document.getElementById("eftOrderNumber").textContent =
+      order.order_number;
+
+    document.getElementById("eftTemplate").textContent =
+      order.cv_template;
+
+    document.getElementById("eftAmount").textContent =
+      "R" + Number(order.amount).toFixed(2);
+
+    document.getElementById("eftReference").textContent =
+      order.order_number;
+
+    document.getElementById("eftPaymentDetails").style.display =
+      "block";
+
+    if (button) {
+      button.textContent = "Payment Order Created";
+    }
+  } catch (error) {
+    console.error("EFT payment error:", error);
+    alert("Could not create your payment order. Please try again.");
+  } finally {
+    if (button && button.textContent === "Creating payment order...") {
+      button.disabled = false;
+      button.textContent = "Create Payment Order";
+    }
+  }
+}
+
+
+
+
 
   /* =========================
      GENERATE CV
